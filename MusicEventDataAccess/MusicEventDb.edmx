@@ -1,0 +1,2583 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicEventModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="500" />
+          <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="Latitude" Type="nvarchar(max)" />
+          <Property Name="Longitude" Type="nvarchar(max)" />
+          <Property Name="IsGlobal" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="ISActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="UpdatedDatetime" Type="datetime" />
+          <Property Name="MainCatID" Type="int" />
+        </EntityType>
+        <EntityType Name="EventDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EventUser">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupChat">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="Chattext" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ISDeleted" Type="bit" />
+          <Property Name="EventID" Type="int" />
+          <Property Name="IsEvent" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="LogsID" />
+          </Key>
+          <Property Name="LogsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Messages" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CreatedDatetime" Type="datetime" Nullable="false" />
+          <Property Name="test" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MainCategory">
+          <Key>
+            <PropertyRef Name="MainCatID" />
+          </Key>
+          <Property Name="MainCatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainCategoryName" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NewEvent">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ISActive" />
+            <PropertyRef Name="IsTmaster" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="200" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Starttime" Type="time" Precision="7" />
+          <Property Name="Endtime" Type="time" Precision="7" />
+          <Property Name="Dealtext" Type="nvarchar(max)" />
+          <Property Name="Percentage" Type="nvarchar" MaxLength="50" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="location" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="ISActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="UpdatedDatetime" Type="datetime" />
+          <Property Name="TicketUrl" Type="nvarchar(max)" />
+          <Property Name="IsTmaster" Type="bit" Nullable="false" />
+          <Property Name="MasterEventID" Type="int" />
+          <Property Name="ViewCount" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="RatingsID" />
+          </Key>
+          <Property Name="RatingsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Ratings" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReviewText" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SubEvent">
+          <Key>
+            <PropertyRef Name="SubEventID" />
+          </Key>
+          <Property Name="SubEventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="SubEventName" Type="nvarchar" MaxLength="200" />
+          <Property Name="SubEventDiscription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" />
+          <Property Name="SubStartDate" Type="datetime" />
+          <Property Name="SubEndDate" Type="datetime" />
+          <Property Name="SubStartTime" Type="time" Precision="7" />
+          <Property Name="SubEndTime" Type="time" Precision="7" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="ISActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="UpdatedDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FbID" Type="nvarchar" MaxLength="500" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CountryCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="16" />
+          <Property Name="Email" Type="nvarchar" MaxLength="75" />
+          <Property Name="Password" Type="nvarchar" MaxLength="510" />
+          <Property Name="UserImagePath" Type="nvarchar(max)" />
+          <Property Name="ProfilePic" Type="varbinary(max)" />
+          <Property Name="IsEnterprice" Type="int" />
+          <Property Name="ApplyEnterprice" Type="bit" />
+          <Property Name="GroupType" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupPeople" Type="nvarchar" MaxLength="500" />
+          <Property Name="AccessToken" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="DeviceToken" Type="nvarchar" MaxLength="500" />
+          <Property Name="DeviceType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="UpdatedDatetime" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="OTPText" Type="nvarchar" MaxLength="20" />
+          <Property Name="OTPCreatedOn" Type="datetime" />
+          <Property Name="IsFlySolo" Type="bit" Nullable="false" />
+          <Property Name="ISGroup" Type="bit" Nullable="false" />
+          <Property Name="IsCouple" Type="bit" Nullable="false" />
+          <Property Name="FaceBookFriends" Type="nvarchar(max)" />
+          <Property Name="MobileContact" Type="nvarchar(max)" />
+          <Property Name="IsBusinessUser" Type="bit" Nullable="false" />
+          <Property Name="BusinessLocation" Type="nvarchar" MaxLength="500" />
+          <Property Name="Bussinesslatitude" Type="nvarchar" MaxLength="100" />
+          <Property Name="Businesslongitude" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsSubAdmin" Type="bit" Nullable="false" />
+          <Property Name="appname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserGroupId" />
+          </Key>
+          <Property Name="UserGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+          <Property Name="GroupImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="GroupType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ISActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastSeen" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users_Groups">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ISApprove" Type="bit" />
+          <Property Name="LastSeen" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="JoinDate" Type="datetime" />
+        </EntityType>
+        <Function Name="AcceptDecline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="isapprove" Type="bit" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+          <Parameter Name="adminuserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ActivityList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddEventsFromMySql" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventName" Type="varchar" Mode="In" />
+          <Parameter Name="Latitude" Type="varchar" Mode="In" />
+          <Parameter Name="Longitude" Type="varchar" Mode="In" />
+          <Parameter Name="Location" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Category" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="StartTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Image" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticketUrl" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="isTmaster" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="AddEventsFromSql" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventName" Type="varchar" Mode="In" />
+          <Parameter Name="Latitude" Type="varchar" Mode="In" />
+          <Parameter Name="Longitude" Type="varchar" Mode="In" />
+          <Parameter Name="Location" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Category" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="enddate" Type="datetime" Mode="In" />
+          <Parameter Name="StartTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="endtime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Image" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticketUrl" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="isTmaster" Type="bit" Mode="In" />
+          <Parameter Name="masterEventID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Admin_AdvertiseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Admin_EventList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Admin_EventList_Paging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="keyword" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="startDates" Type="datetime" Mode="In" />
+          <Parameter Name="enddate" Type="datetime" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="SortDir" Type="varchar" Mode="In" />
+          <Parameter Name="images" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Admin_GetCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Admin_GetDashboardCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Admin_MainGetCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Admin_UsersList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AdvertiseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="applepushnotificationChat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="groupid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AutoLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="mobileContact" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="faceBookFriends" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="deviceToken" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="deviceType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="guid" Type="nvarchar" Mode="In" />
+          <Parameter Name="appname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="activityid" Type="int" Mode="In" />
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="activityName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="location" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="startDate" Type="datetime" Mode="In" />
+          <Parameter Name="endDate" Type="datetime" Mode="In" />
+          <Parameter Name="activityDescription" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="imagepath" Type="nvarchar" Mode="In" />
+          <Parameter Name="starttime" Type="time" Mode="In" />
+          <Parameter Name="endtime" Type="time" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventID" Type="int" Mode="In" />
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="category" Type="int" Mode="In" />
+          <Parameter Name="eventName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="location" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="startDate" Type="datetime" Mode="In" />
+          <Parameter Name="endDate" Type="datetime" Mode="In" />
+          <Parameter Name="eventDescription" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="imagepath" Type="nvarchar" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="starttime" Type="time" Mode="In" />
+          <Parameter Name="endtime" Type="time" Mode="In" />
+          <Parameter Name="dealtext" Type="nvarchar" Mode="In" />
+          <Parameter Name="percentage" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TemplateID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Distance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+          <Parameter Name="lat1" Type="float" Mode="In" />
+          <Parameter Name="long1" Type="float" Mode="In" />
+          <Parameter Name="lat2" Type="float" Mode="In" />
+          <Parameter Name="long2" Type="float" Mode="In" />
+        </Function>
+        <Function Name="EventList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EventListForDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="EventUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FillProfileMissingData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="userName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="userID" Type="nvarchar" Mode="In" />
+          <Parameter Name="imagePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="isBusinessUser" Type="bit" Mode="In" />
+          <Parameter Name="businessLocation" Type="nvarchar" Mode="In" />
+          <Parameter Name="bussinesslatitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="businesslongitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+          <Parameter Name="appname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fnNTextToIntTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Data" Type="ntext" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Value" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fnNTextTostringTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Data" Type="ntext" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Value" Type="nvarchar" MaxLength="100" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="ForgetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phoneno" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GenrateOTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phoneno" Type="nvarchar" Mode="In" />
+          <Parameter Name="otp" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetActivityDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="activityId" Type="int" Mode="In" />
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetChatList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetDayName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="dates" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetEnddate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime">
+          <Parameter Name="dates" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetEventCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetEventDatewise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetEventDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetEventListLast1hour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetEventnearME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEventStartDateEndDatewise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMaxCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetMyChatList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetRatingsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GroupChatDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="groupID" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="boolval" Type="bit" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GroupCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="groupid" Type="int" Mode="In" />
+          <Parameter Name="groupname" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="image" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="tagname" Type="nvarchar" Mode="In" />
+          <Parameter Name="grouptype" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GroupJoinUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GroupUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="groupid" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InviteGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="groupID" Type="int" Mode="In" />
+          <Parameter Name="inviteUserID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Character" Type="char" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="JoinEventWithUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="shareGroupType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Character" Type="char" Mode="In" />
+          <Parameter Name="chattext" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="DeviceToken" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DeviceType" Type="nvarchar" Mode="In" />
+          <Parameter Name="mobileContact" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="guid" Type="nvarchar" Mode="In" />
+          <Parameter Name="appname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LoginFacebook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FbID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="DeviceToken" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DeviceType" Type="nvarchar" Mode="In" />
+          <Parameter Name="imagePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="guid" Type="nvarchar" Mode="In" />
+          <Parameter Name="faceBookFriends" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="isLogin" Type="bit" Mode="In" />
+          <Parameter Name="appname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Logout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ManageRatings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="eventID" Type="int" Mode="In" />
+          <Parameter Name="ratings" Type="decimal" Mode="In" />
+          <Parameter Name="reviewText" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="MoveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maxid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MyEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="NewChatPushNotification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PendingUserRequestList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupid" Type="int" Mode="In" />
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Push_AcceptDecline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="adminid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Push_AddToCalender" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="grouptype" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Push_joinGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="inviteUserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Push_NewRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReGenrateOTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phoneno" Type="nvarchar" Mode="In" />
+          <Parameter Name="otp" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="RegisterWithPhoneRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phoneno" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="DeviceToken" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DeviceType" Type="nvarchar" Mode="In" />
+          <Parameter Name="guid" Type="nvarchar" Mode="In" />
+          <Parameter Name="otp" Type="nvarchar" Mode="In" />
+          <Parameter Name="mobileContact" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="RemoveFromGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="isadd" Type="bit" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="RemoveUserFromGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="GroupId" Type="int" Mode="In" />
+          <Parameter Name="removeUserId" Type="int" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SendMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupId" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="chattext" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SerchEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="eventName" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+          <Parameter Name="latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ShareEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="grouptype" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="userName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="userID" Type="nvarchar" Mode="In" />
+          <Parameter Name="imagePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="groupPeople" Type="nvarchar" Mode="In" />
+          <Parameter Name="groupType" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SplitString" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Input" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Character" Type="char" Mode="In" />
+        </Function>
+        <Function Name="VerifyOTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OTP" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MusicEventModelStoreContainer">
+          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventDetail" EntityType="Self.EventDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventUser" EntityType="Self.EventUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupChat" EntityType="Self.GroupChat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainCategory" EntityType="Self.MainCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubEvent" EntityType="Self.SubEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users_Groups" EntityType="Self.Users_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewEvent" EntityType="Self.NewEvent" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NewEvent].[EventID] AS [EventID], 
+    [NewEvent].[UserID] AS [UserID], 
+    [NewEvent].[CategoryID] AS [CategoryID], 
+    [NewEvent].[EventName] AS [EventName], 
+    [NewEvent].[StartDate] AS [StartDate], 
+    [NewEvent].[EndDate] AS [EndDate], 
+    [NewEvent].[Starttime] AS [Starttime], 
+    [NewEvent].[Endtime] AS [Endtime], 
+    [NewEvent].[Dealtext] AS [Dealtext], 
+    [NewEvent].[Percentage] AS [Percentage], 
+    [NewEvent].[latitude] AS [latitude], 
+    [NewEvent].[longitude] AS [longitude], 
+    [NewEvent].[location] AS [location], 
+    [NewEvent].[Image] AS [Image], 
+    [NewEvent].[ISActive] AS [ISActive], 
+    [NewEvent].[CreatedBy] AS [CreatedBy], 
+    [NewEvent].[UpdatedBy] AS [UpdatedBy], 
+    [NewEvent].[CreatedDatetime] AS [CreatedDatetime], 
+    [NewEvent].[UpdatedDatetime] AS [UpdatedDatetime], 
+    [NewEvent].[TicketUrl] AS [TicketUrl], 
+    [NewEvent].[IsTmaster] AS [IsTmaster], 
+    [NewEvent].[MasterEventID] AS [MasterEventID], 
+    [NewEvent].[ViewCount] AS [ViewCount]
+    FROM [dbo].[NewEvent] AS [NewEvent]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicEventModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="fnNTextToIntTable_Result">
+          <Property Name="Value" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="fnNTextTostringTable_Result">
+          <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="ImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsGlobal" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ISActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="MainCatID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EventDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EventUser">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GroupChat">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="Chattext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ISDeleted" Type="Boolean" />
+          <Property Name="EventID" Type="Int32" />
+          <Property Name="IsEvent" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogsID" />
+          </Key>
+          <Property Name="LogsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Messages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TemplateID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="test" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MainCategory">
+          <Key>
+            <PropertyRef Name="MainCatID" />
+          </Key>
+          <Property Name="MainCatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainCategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingsID" />
+          </Key>
+          <Property Name="RatingsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Ratings" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReviewText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SubEvent">
+          <Key>
+            <PropertyRef Name="SubEventID" />
+          </Key>
+          <Property Name="SubEventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="SubEventName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SubEventDiscription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SubStartDate" Type="DateTime" Precision="3" />
+          <Property Name="SubEndDate" Type="DateTime" Precision="3" />
+          <Property Name="SubStartTime" Type="Time" Precision="7" />
+          <Property Name="SubEndTime" Type="Time" Precision="7" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FbID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="UserImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsEnterprice" Type="Int32" />
+          <Property Name="ApplyEnterprice" Type="Boolean" />
+          <Property Name="GroupType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupPeople" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AccessToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="DeviceToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="OTPText" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OTPCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsFlySolo" Type="Boolean" Nullable="false" />
+          <Property Name="ISGroup" Type="Boolean" Nullable="false" />
+          <Property Name="IsCouple" Type="Boolean" Nullable="false" />
+          <Property Name="FaceBookFriends" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsBusinessUser" Type="Boolean" Nullable="false" />
+          <Property Name="BusinessLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Bussinesslatitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Businesslongitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsSubAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="appname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserGroupId" />
+          </Key>
+          <Property Name="UserGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GroupImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GroupType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastSeen" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Users_Groups">
+          <Key>
+            <PropertyRef Name="GroupId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ISApprove" Type="Boolean" />
+          <Property Name="LastSeen" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="JoinDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="NewEvent">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ISActive" />
+            <PropertyRef Name="IsTmaster" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="EventName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Starttime" Type="Time" Precision="7" />
+          <Property Name="Endtime" Type="Time" Precision="7" />
+          <Property Name="Dealtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Percentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ISActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="TicketUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsTmaster" Type="Boolean" Nullable="false" />
+          <Property Name="MasterEventID" Type="Int32" />
+          <Property Name="ViewCount" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="MusicEventEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="EventDetails" EntityType="Self.EventDetail" />
+          <EntitySet Name="EventUsers" EntityType="Self.EventUser" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="GroupChats" EntityType="Self.GroupChat" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="MainCategories" EntityType="Self.MainCategory" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="SubEvents" EntityType="Self.SubEvent" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
+          <EntitySet Name="Users_Groups" EntityType="Self.Users_Groups" />
+          <EntitySet Name="NewEvents" EntityType="Self.NewEvent" />
+          <FunctionImport Name="fnNTextToIntTable" IsComposable="true" ReturnType="Collection(MusicEventModel.fnNTextToIntTable_Result)">
+            <Parameter Name="Data" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fnNTextTostringTable" IsComposable="true" ReturnType="Collection(MusicEventModel.fnNTextTostringTable_Result)">
+            <Parameter Name="Data" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AcceptDecline" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="isapprove" Mode="In" Type="Boolean" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+            <Parameter Name="adminuserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ActivityList" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddEventsFromMySql" ReturnType="Collection(Int32)">
+            <Parameter Name="EventName" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
+            <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="StartTime" Mode="In" Type="String" />
+            <Parameter Name="Image" Mode="In" Type="String" />
+            <Parameter Name="ticketUrl" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isTmaster" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddEventsFromSql" ReturnType="Collection(Int32)">
+            <Parameter Name="EventName" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
+            <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+            <Parameter Name="StartTime" Mode="In" Type="String" />
+            <Parameter Name="endtime" Mode="In" Type="String" />
+            <Parameter Name="Image" Mode="In" Type="String" />
+            <Parameter Name="ticketUrl" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="isTmaster" Mode="In" Type="Boolean" />
+            <Parameter Name="masterEventID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Admin_AdvertiseList" ReturnType="Collection(MusicEventModel.Admin_AdvertiseList_Result)">
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Admin_EventList" ReturnType="Collection(MusicEventModel.Admin_EventList_Result)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Admin_EventList_Paging">
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="startDates" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="SortCol" Mode="In" Type="String" />
+            <Parameter Name="SortDir" Mode="In" Type="String" />
+            <Parameter Name="images" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Admin_GetCategoryList" ReturnType="Collection(MusicEventModel.Admin_GetCategoryList_Result)">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Admin_GetDashboardCount" />
+          <FunctionImport Name="Admin_MainGetCategoryList" ReturnType="Collection(MusicEventModel.Admin_MainGetCategoryList_Result)">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Admin_UsersList" ReturnType="Collection(MusicEventModel.Admin_UsersList_Result)">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AdvertiseList">
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="applepushnotificationChat" ReturnType="Collection(MusicEventModel.applepushnotificationChat_Result)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="groupid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AutoLogin" ReturnType="Collection(MusicEventModel.AutoLogin_Result)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="mobileContact" Mode="In" Type="String" />
+            <Parameter Name="faceBookFriends" Mode="In" Type="String" />
+            <Parameter Name="deviceToken" Mode="In" Type="String" />
+            <Parameter Name="deviceType" Mode="In" Type="String" />
+            <Parameter Name="guid" Mode="In" Type="String" />
+            <Parameter Name="appname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateActivity" ReturnType="Collection(String)">
+            <Parameter Name="activityid" Mode="In" Type="Int32" />
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="activityName" Mode="In" Type="String" />
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="activityDescription" Mode="In" Type="String" />
+            <Parameter Name="imagepath" Mode="In" Type="String" />
+            <Parameter Name="starttime" Mode="In" Type="Time" />
+            <Parameter Name="endtime" Mode="In" Type="Time" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateEvent" ReturnType="Collection(String)">
+            <Parameter Name="eventID" Mode="In" Type="Int32" />
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="category" Mode="In" Type="Int32" />
+            <Parameter Name="eventName" Mode="In" Type="String" />
+            <Parameter Name="location" Mode="In" Type="String" />
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="eventDescription" Mode="In" Type="String" />
+            <Parameter Name="imagepath" Mode="In" Type="String" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="starttime" Mode="In" Type="Time" />
+            <Parameter Name="endtime" Mode="In" Type="Time" />
+            <Parameter Name="dealtext" Mode="In" Type="String" />
+            <Parameter Name="percentage" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateLog">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="TemplateID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventList" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EventListForDetail" ReturnType="Collection(MusicEventModel.EventListForDetail_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="EventUserList" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FillProfileMissingData" ReturnType="Collection(String)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="userID" Mode="In" Type="String" />
+            <Parameter Name="imagePath" Mode="In" Type="String" />
+            <Parameter Name="isBusinessUser" Mode="In" Type="Boolean" />
+            <Parameter Name="businessLocation" Mode="In" Type="String" />
+            <Parameter Name="bussinesslatitude" Mode="In" Type="String" />
+            <Parameter Name="businesslongitude" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+            <Parameter Name="appname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ForgetPassword" ReturnType="Collection(MusicEventModel.ForgetPassword_Result)">
+            <Parameter Name="CountryCode" Mode="In" Type="String" />
+            <Parameter Name="Phoneno" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GenrateOTP" ReturnType="Collection(Int32)">
+            <Parameter Name="CountryCode" Mode="In" Type="String" />
+            <Parameter Name="Phoneno" Mode="In" Type="String" />
+            <Parameter Name="otp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetActivityDetail" ReturnType="Collection(String)">
+            <Parameter Name="activityId" Mode="In" Type="Int32" />
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCategoryList" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetChatList" ReturnType="Collection(String)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEventCategoryList" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEventDatewise" ReturnType="Collection(MusicEventModel.GetEventDatewise_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetEventDetail" ReturnType="Collection(String)">
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEventListLast1hour" ReturnType="Collection(MusicEventModel.GetEventListLast1hour_Result)" />
+          <FunctionImport Name="GetEventnearME">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEventStartDateEndDatewise" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMaxCount" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="GetMyChatList" ReturnType="Collection(String)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetRatingsList" ReturnType="Collection(MusicEventModel.GetRatingsList_Result)">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GroupChatDetail" ReturnType="Collection(String)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="groupID" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="boolval" Mode="In" Type="Boolean" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GroupCreate" ReturnType="Collection(String)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="groupid" Mode="In" Type="Int32" />
+            <Parameter Name="groupname" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="tagname" Mode="In" Type="String" />
+            <Parameter Name="grouptype" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GroupJoinUserList" ReturnType="Collection(MusicEventModel.GroupJoinUserList_Result)">
+            <Parameter Name="groupid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GroupUserList" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="groupid" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InviteGroup" ReturnType="Collection(String)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="groupID" Mode="In" Type="Int32" />
+            <Parameter Name="inviteUserID" Mode="In" Type="String" />
+            <Parameter Name="Character" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="JoinEventWithUser" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="shareGroupType" Mode="In" Type="String" />
+            <Parameter Name="Character" Mode="In" Type="String" />
+            <Parameter Name="chattext" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Login" ReturnType="Collection(MusicEventModel.Login_Result)">
+            <Parameter Name="CountryCode" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="DeviceToken" Mode="In" Type="String" />
+            <Parameter Name="DeviceType" Mode="In" Type="String" />
+            <Parameter Name="mobileContact" Mode="In" Type="String" />
+            <Parameter Name="guid" Mode="In" Type="String" />
+            <Parameter Name="appname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginFacebook" ReturnType="Collection(String)">
+            <Parameter Name="FbID" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="DeviceToken" Mode="In" Type="String" />
+            <Parameter Name="DeviceType" Mode="In" Type="String" />
+            <Parameter Name="imagePath" Mode="In" Type="String" />
+            <Parameter Name="guid" Mode="In" Type="String" />
+            <Parameter Name="faceBookFriends" Mode="In" Type="String" />
+            <Parameter Name="isLogin" Mode="In" Type="Boolean" />
+            <Parameter Name="appname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Logout" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ManageRatings">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="eventID" Mode="In" Type="Int32" />
+            <Parameter Name="ratings" Mode="In" Type="Decimal" />
+            <Parameter Name="reviewText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MoveData" ReturnType="Collection(MusicEventModel.MoveData_Result)">
+            <Parameter Name="maxid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MyEvent" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewChatPushNotification" ReturnType="Collection(MusicEventModel.NewChatPushNotification_Result)">
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PendingUserRequestList" ReturnType="Collection(String)">
+            <Parameter Name="groupid" Mode="In" Type="Int32" />
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Push_AcceptDecline" ReturnType="Collection(MusicEventModel.Push_AcceptDecline_Result)">
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="adminid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Push_AddToCalender" ReturnType="Collection(MusicEventModel.Push_AddToCalender_Result)">
+            <Parameter Name="eventId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="grouptype" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Push_joinGroup" ReturnType="Collection(MusicEventModel.Push_joinGroup_Result)">
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="inviteUserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Push_NewRequest" ReturnType="Collection(MusicEventModel.Push_NewRequest_Result)">
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReGenrateOTP" ReturnType="Collection(Int32)">
+            <Parameter Name="CountryCode" Mode="In" Type="String" />
+            <Parameter Name="Phoneno" Mode="In" Type="String" />
+            <Parameter Name="otp" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegisterWithPhoneRequest" ReturnType="Collection(MusicEventModel.RegisterWithPhoneRequest_Result)">
+            <Parameter Name="CountryCode" Mode="In" Type="String" />
+            <Parameter Name="Phoneno" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="DeviceToken" Mode="In" Type="String" />
+            <Parameter Name="DeviceType" Mode="In" Type="String" />
+            <Parameter Name="guid" Mode="In" Type="String" />
+            <Parameter Name="otp" Mode="In" Type="String" />
+            <Parameter Name="mobileContact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RemoveFromGroup" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="isadd" Mode="In" Type="Boolean" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RemoveUserFromGroup" ReturnType="Collection(String)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="GroupId" Mode="In" Type="Int32" />
+            <Parameter Name="removeUserId" Mode="In" Type="Int32" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SendMessage" ReturnType="Collection(String)">
+            <Parameter Name="groupId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="chattext" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SerchEvent" ReturnType="Collection(String)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="eventName" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+            <Parameter Name="latitude" Mode="In" Type="String" />
+            <Parameter Name="longitude" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ShareEvent" ReturnType="Collection(MusicEventModel.ShareEvent_Result)">
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="grouptype" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateProfile" ReturnType="Collection(String)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="userID" Mode="In" Type="String" />
+            <Parameter Name="imagePath" Mode="In" Type="String" />
+            <Parameter Name="groupPeople" Mode="In" Type="String" />
+            <Parameter Name="groupType" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="accesstoken" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SplitString" ReturnType="Collection(String)">
+            <Parameter Name="Input" Mode="In" Type="String" />
+            <Parameter Name="Character" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VerifyOTP" ReturnType="Collection(String)">
+            <Parameter Name="OTP" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Admin_AdvertiseList_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StartDate" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="EndDate" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Admin_EventList_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StartDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EndDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Admin_GetCategoryList_Result">
+          <Property Type="String" Name="CategoryUniqueID" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="Admin_MainGetCategoryList_Result">
+          <Property Type="String" Name="CategoryUniqueID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="MainCatID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Admin_UsersList_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="applepushnotificationChat_Result">
+          <Property Type="Int32" Name="UserGroupId" Nullable="false" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="GroupImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
+          <Property Type="Int32" Name="newmessagecoumt" Nullable="true" />
+          <Property Type="Int32" Name="pendingrequest" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AutoLogin_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FbID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="510" />
+          <Property Type="String" Name="UserImagePath" Nullable="true" />
+          <Property Type="Binary" Name="ProfilePic" Nullable="true" />
+          <Property Type="Int32" Name="IsEnterprice" Nullable="true" />
+          <Property Type="Boolean" Name="ApplyEnterprice" Nullable="true" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupPeople" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AccessToken" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RoleID" Nullable="true" />
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="OTPText" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="OTPCreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsFlySolo" Nullable="false" />
+          <Property Type="Boolean" Name="ISGroup" Nullable="false" />
+          <Property Type="Boolean" Name="IsCouple" Nullable="false" />
+          <Property Type="String" Name="FaceBookFriends" Nullable="true" />
+          <Property Type="String" Name="MobileContact" Nullable="true" />
+          <Property Type="Boolean" Name="IsBusinessUser" Nullable="false" />
+          <Property Type="String" Name="BusinessLocation" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Bussinesslatitude" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Businesslongitude" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="IsSubAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="EventListForDetail_Result">
+          <Property Type="Int32" Name="EventID" Nullable="true" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Location" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="StartTime" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="EndTime" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="StartDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="EndDate" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="SubStartDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IsFlySolo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="IsCouple" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="ISGroup" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="addtoCalander" Nullable="true" />
+          <Property Type="Int32" Name="distancemile" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ForgetPassword_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FbID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="510" />
+          <Property Type="String" Name="UserImagePath" Nullable="true" />
+          <Property Type="Binary" Name="ProfilePic" Nullable="true" />
+          <Property Type="Int32" Name="IsEnterprice" Nullable="true" />
+          <Property Type="Boolean" Name="ApplyEnterprice" Nullable="true" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupPeople" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AccessToken" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RoleID" Nullable="true" />
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="OTPText" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="OTPCreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsFlySolo" Nullable="false" />
+          <Property Type="Boolean" Name="ISGroup" Nullable="false" />
+          <Property Type="Boolean" Name="IsCouple" Nullable="false" />
+          <Property Type="String" Name="FaceBookFriends" Nullable="true" />
+          <Property Type="String" Name="MobileContact" Nullable="true" />
+          <Property Type="Boolean" Name="IsBusinessUser" Nullable="false" />
+          <Property Type="String" Name="BusinessLocation" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Bussinesslatitude" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Businesslongitude" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="IsSubAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetEventDatewise_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="Int32" Name="SubEventCount" Nullable="true" />
+          <Property Type="String" Name="EventStartTime" Nullable="true" />
+          <Property Type="String" Name="EventEndTime" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Ratings" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="GetEventListLast1hour_Result">
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetRatingsList_Result">
+          <Property Type="Int32" Name="RatingsID" Nullable="false" />
+          <Property Type="Int32" Name="EventID" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Decimal" Name="Ratings" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="ReviewText" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserImagePath" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GroupJoinUserList_Result">
+          <Property Type="String" Name="UserImagePath" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISApprove" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+          <Property Type="Int32" Name="isAdmin" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Login_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FbID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="510" />
+          <Property Type="String" Name="UserImagePath" Nullable="true" />
+          <Property Type="Binary" Name="ProfilePic" Nullable="true" />
+          <Property Type="Int32" Name="IsEnterprice" Nullable="true" />
+          <Property Type="Boolean" Name="ApplyEnterprice" Nullable="true" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupPeople" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AccessToken" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RoleID" Nullable="true" />
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="OTPText" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="OTPCreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsFlySolo" Nullable="false" />
+          <Property Type="Boolean" Name="ISGroup" Nullable="false" />
+          <Property Type="Boolean" Name="IsCouple" Nullable="false" />
+          <Property Type="String" Name="FaceBookFriends" Nullable="true" />
+          <Property Type="String" Name="MobileContact" Nullable="true" />
+          <Property Type="Boolean" Name="IsBusinessUser" Nullable="false" />
+          <Property Type="String" Name="BusinessLocation" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Bussinesslatitude" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Businesslongitude" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="IsSubAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="MoveData_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="String" Name="EventDiscription" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="NewChatPushNotification_Result">
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="GroupId" Nullable="true" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+          <Property Type="String" Name="GroupImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="pendingrequest" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Push_AcceptDecline_Result">
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="GroupId" Nullable="true" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+          <Property Type="String" Name="GroupImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Push_AddToCalender_Result">
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="Push_joinGroup_Result">
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="GroupId" Nullable="true" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+          <Property Type="String" Name="GroupImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Push_NewRequest_Result">
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="GroupId" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+          <Property Type="String" Name="GroupImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RegisterWithPhoneRequest_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FbID" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="510" />
+          <Property Type="String" Name="UserImagePath" Nullable="true" />
+          <Property Type="Binary" Name="ProfilePic" Nullable="true" />
+          <Property Type="Int32" Name="IsEnterprice" Nullable="true" />
+          <Property Type="Boolean" Name="ApplyEnterprice" Nullable="true" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupPeople" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AccessToken" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RoleID" Nullable="true" />
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="OTPText" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="OTPCreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsFlySolo" Nullable="false" />
+          <Property Type="Boolean" Name="ISGroup" Nullable="false" />
+          <Property Type="Boolean" Name="IsCouple" Nullable="false" />
+          <Property Type="String" Name="FaceBookFriends" Nullable="true" />
+          <Property Type="String" Name="MobileContact" Nullable="true" />
+          <Property Type="Boolean" Name="IsBusinessUser" Nullable="false" />
+          <Property Type="String" Name="BusinessLocation" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Bussinesslatitude" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Businesslongitude" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <Property Type="Boolean" Name="IsSubAdmin" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ShareEvent_Result">
+          <Property Type="String" Name="DeviceToken" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DeviceType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EventID" Nullable="true" />
+          <Property Type="Int32" Name="GroupID" Nullable="false" />
+          <Property Type="Int32" Name="AdminId" Nullable="true" />
+          <Property Type="String" Name="GroupImage" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="GroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="ISActive" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="GroupChat" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="pendingrequest" Nullable="true" />
+          <Property Type="Int32" Name="isevent" Nullable="false" />
+          <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicEventModelStoreContainer" CdmEntityContainer="MusicEventEntities">
+          <EntitySetMapping Name="Advertisements">
+            <EntityTypeMapping TypeName="MusicEventModel.Advertisement">
+              <MappingFragment StoreEntitySet="Advertisement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IsGlobal" ColumnName="IsGlobal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MusicEventModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventDetails">
+            <EntityTypeMapping TypeName="MusicEventModel.EventDetail">
+              <MappingFragment StoreEntitySet="EventDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventUsers">
+            <EntityTypeMapping TypeName="MusicEventModel.EventUser">
+              <MappingFragment StoreEntitySet="EventUser">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="MusicEventModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupChats">
+            <EntityTypeMapping TypeName="MusicEventModel.GroupChat">
+              <MappingFragment StoreEntitySet="GroupChat">
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Chattext" ColumnName="Chattext" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ISDeleted" ColumnName="ISDeleted" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="IsEvent" ColumnName="IsEvent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="MusicEventModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="LogsID" ColumnName="LogsID" />
+                <ScalarProperty Name="Messages" ColumnName="Messages" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="test" ColumnName="test" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainCategories">
+            <EntityTypeMapping TypeName="MusicEventModel.MainCategory">
+              <MappingFragment StoreEntitySet="MainCategory">
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="MusicEventModel.Rating">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="RatingsID" ColumnName="RatingsID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+                <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubEvents">
+            <EntityTypeMapping TypeName="MusicEventModel.SubEvent">
+              <MappingFragment StoreEntitySet="SubEvent">
+                <ScalarProperty Name="SubEventID" ColumnName="SubEventID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="SubEventName" ColumnName="SubEventName" />
+                <ScalarProperty Name="SubEventDiscription" ColumnName="SubEventDiscription" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="SubStartDate" ColumnName="SubStartDate" />
+                <ScalarProperty Name="SubEndDate" ColumnName="SubEndDate" />
+                <ScalarProperty Name="SubStartTime" ColumnName="SubStartTime" />
+                <ScalarProperty Name="SubEndTime" ColumnName="SubEndTime" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MusicEventModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FbID" ColumnName="FbID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="IsEnterprice" ColumnName="IsEnterprice" />
+                <ScalarProperty Name="ApplyEnterprice" ColumnName="ApplyEnterprice" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="GroupPeople" ColumnName="GroupPeople" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OTPText" ColumnName="OTPText" />
+                <ScalarProperty Name="OTPCreatedOn" ColumnName="OTPCreatedOn" />
+                <ScalarProperty Name="IsFlySolo" ColumnName="IsFlySolo" />
+                <ScalarProperty Name="ISGroup" ColumnName="ISGroup" />
+                <ScalarProperty Name="IsCouple" ColumnName="IsCouple" />
+                <ScalarProperty Name="FaceBookFriends" ColumnName="FaceBookFriends" />
+                <ScalarProperty Name="MobileContact" ColumnName="MobileContact" />
+                <ScalarProperty Name="IsBusinessUser" ColumnName="IsBusinessUser" />
+                <ScalarProperty Name="BusinessLocation" ColumnName="BusinessLocation" />
+                <ScalarProperty Name="Bussinesslatitude" ColumnName="Bussinesslatitude" />
+                <ScalarProperty Name="Businesslongitude" ColumnName="Businesslongitude" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsSubAdmin" ColumnName="IsSubAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="MusicEventModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="UserGroupId" ColumnName="UserGroupId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_Groups">
+            <EntityTypeMapping TypeName="MusicEventModel.Users_Groups">
+              <MappingFragment StoreEntitySet="Users_Groups">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ISApprove" ColumnName="ISApprove" />
+                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewEvents">
+            <EntityTypeMapping TypeName="MusicEventModel.NewEvent">
+              <MappingFragment StoreEntitySet="NewEvent">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="MusicEventModel.Store.fnNTextToIntTable" FunctionImportName="fnNTextToIntTable">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.fnNTextToIntTable_Result">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MusicEventModel.Store.fnNTextTostringTable" FunctionImportName="fnNTextTostringTable">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.fnNTextTostringTable_Result">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AcceptDecline" FunctionName="MusicEventModel.Store.AcceptDecline" />
+          <FunctionImportMapping FunctionImportName="ActivityList" FunctionName="MusicEventModel.Store.ActivityList" />
+          <FunctionImportMapping FunctionImportName="AddEventsFromMySql" FunctionName="MusicEventModel.Store.AddEventsFromMySql" />
+          <FunctionImportMapping FunctionImportName="AddEventsFromSql" FunctionName="MusicEventModel.Store.AddEventsFromSql" />
+          <FunctionImportMapping FunctionImportName="Admin_AdvertiseList" FunctionName="MusicEventModel.Store.Admin_AdvertiseList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Admin_AdvertiseList_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Admin_EventList" FunctionName="MusicEventModel.Store.Admin_EventList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Admin_EventList_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Admin_EventList_Paging" FunctionName="MusicEventModel.Store.Admin_EventList_Paging" />
+          <FunctionImportMapping FunctionImportName="Admin_GetCategoryList" FunctionName="MusicEventModel.Store.Admin_GetCategoryList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Admin_GetCategoryList_Result">
+                <ScalarProperty Name="CategoryUniqueID" ColumnName="CategoryUniqueID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Admin_GetDashboardCount" FunctionName="MusicEventModel.Store.Admin_GetDashboardCount" />
+          <FunctionImportMapping FunctionImportName="Admin_MainGetCategoryList" FunctionName="MusicEventModel.Store.Admin_MainGetCategoryList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Admin_MainGetCategoryList_Result">
+                <ScalarProperty Name="CategoryUniqueID" ColumnName="CategoryUniqueID" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Admin_UsersList" FunctionName="MusicEventModel.Store.Admin_UsersList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Admin_UsersList_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AdvertiseList" FunctionName="MusicEventModel.Store.AdvertiseList" />
+          <FunctionImportMapping FunctionImportName="applepushnotificationChat" FunctionName="MusicEventModel.Store.applepushnotificationChat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.applepushnotificationChat_Result">
+                <ScalarProperty Name="UserGroupId" ColumnName="UserGroupId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="newmessagecoumt" ColumnName="newmessagecoumt" />
+                <ScalarProperty Name="pendingrequest" ColumnName="pendingrequest" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AutoLogin" FunctionName="MusicEventModel.Store.AutoLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.AutoLogin_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FbID" ColumnName="FbID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="IsEnterprice" ColumnName="IsEnterprice" />
+                <ScalarProperty Name="ApplyEnterprice" ColumnName="ApplyEnterprice" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="GroupPeople" ColumnName="GroupPeople" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OTPText" ColumnName="OTPText" />
+                <ScalarProperty Name="OTPCreatedOn" ColumnName="OTPCreatedOn" />
+                <ScalarProperty Name="IsFlySolo" ColumnName="IsFlySolo" />
+                <ScalarProperty Name="ISGroup" ColumnName="ISGroup" />
+                <ScalarProperty Name="IsCouple" ColumnName="IsCouple" />
+                <ScalarProperty Name="FaceBookFriends" ColumnName="FaceBookFriends" />
+                <ScalarProperty Name="MobileContact" ColumnName="MobileContact" />
+                <ScalarProperty Name="IsBusinessUser" ColumnName="IsBusinessUser" />
+                <ScalarProperty Name="BusinessLocation" ColumnName="BusinessLocation" />
+                <ScalarProperty Name="Bussinesslatitude" ColumnName="Bussinesslatitude" />
+                <ScalarProperty Name="Businesslongitude" ColumnName="Businesslongitude" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsSubAdmin" ColumnName="IsSubAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CreateActivity" FunctionName="MusicEventModel.Store.CreateActivity" />
+          <FunctionImportMapping FunctionImportName="CreateEvent" FunctionName="MusicEventModel.Store.CreateEvent" />
+          <FunctionImportMapping FunctionImportName="CreateLog" FunctionName="MusicEventModel.Store.CreateLog" />
+          <FunctionImportMapping FunctionImportName="EventList" FunctionName="MusicEventModel.Store.EventList" />
+          <FunctionImportMapping FunctionImportName="EventListForDetail" FunctionName="MusicEventModel.Store.EventListForDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.EventListForDetail_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="SubStartDate" ColumnName="SubStartDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="IsFlySolo" ColumnName="IsFlySolo" />
+                <ScalarProperty Name="IsCouple" ColumnName="IsCouple" />
+                <ScalarProperty Name="ISGroup" ColumnName="ISGroup" />
+                <ScalarProperty Name="addtoCalander" ColumnName="addtoCalander" />
+                <ScalarProperty Name="distancemile" ColumnName="distancemile" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventUserList" FunctionName="MusicEventModel.Store.EventUserList" />
+          <FunctionImportMapping FunctionImportName="FillProfileMissingData" FunctionName="MusicEventModel.Store.FillProfileMissingData" />
+          <FunctionImportMapping FunctionImportName="ForgetPassword" FunctionName="MusicEventModel.Store.ForgetPassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.ForgetPassword_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FbID" ColumnName="FbID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="IsEnterprice" ColumnName="IsEnterprice" />
+                <ScalarProperty Name="ApplyEnterprice" ColumnName="ApplyEnterprice" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="GroupPeople" ColumnName="GroupPeople" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OTPText" ColumnName="OTPText" />
+                <ScalarProperty Name="OTPCreatedOn" ColumnName="OTPCreatedOn" />
+                <ScalarProperty Name="IsFlySolo" ColumnName="IsFlySolo" />
+                <ScalarProperty Name="ISGroup" ColumnName="ISGroup" />
+                <ScalarProperty Name="IsCouple" ColumnName="IsCouple" />
+                <ScalarProperty Name="FaceBookFriends" ColumnName="FaceBookFriends" />
+                <ScalarProperty Name="MobileContact" ColumnName="MobileContact" />
+                <ScalarProperty Name="IsBusinessUser" ColumnName="IsBusinessUser" />
+                <ScalarProperty Name="BusinessLocation" ColumnName="BusinessLocation" />
+                <ScalarProperty Name="Bussinesslatitude" ColumnName="Bussinesslatitude" />
+                <ScalarProperty Name="Businesslongitude" ColumnName="Businesslongitude" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsSubAdmin" ColumnName="IsSubAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GenrateOTP" FunctionName="MusicEventModel.Store.GenrateOTP" />
+          <FunctionImportMapping FunctionImportName="GetActivityDetail" FunctionName="MusicEventModel.Store.GetActivityDetail" />
+          <FunctionImportMapping FunctionImportName="GetCategoryList" FunctionName="MusicEventModel.Store.GetCategoryList" />
+          <FunctionImportMapping FunctionImportName="GetChatList" FunctionName="MusicEventModel.Store.GetChatList" />
+          <FunctionImportMapping FunctionImportName="GetEventCategoryList" FunctionName="MusicEventModel.Store.GetEventCategoryList" />
+          <FunctionImportMapping FunctionImportName="GetEventDatewise" FunctionName="MusicEventModel.Store.GetEventDatewise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetEventDatewise_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="SubEventCount" ColumnName="SubEventCount" />
+                <ScalarProperty Name="EventStartTime" ColumnName="EventStartTime" />
+                <ScalarProperty Name="EventEndTime" ColumnName="EventEndTime" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEventDetail" FunctionName="MusicEventModel.Store.GetEventDetail" />
+          <FunctionImportMapping FunctionImportName="GetEventListLast1hour" FunctionName="MusicEventModel.Store.GetEventListLast1hour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetEventListLast1hour_Result">
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEventnearME" FunctionName="MusicEventModel.Store.GetEventnearME" />
+          <FunctionImportMapping FunctionImportName="GetEventStartDateEndDatewise" FunctionName="MusicEventModel.Store.GetEventStartDateEndDatewise" />
+          <FunctionImportMapping FunctionImportName="GetMaxCount" FunctionName="MusicEventModel.Store.GetMaxCount" />
+          <FunctionImportMapping FunctionImportName="GetMyChatList" FunctionName="MusicEventModel.Store.GetMyChatList" />
+          <FunctionImportMapping FunctionImportName="GetRatingsList" FunctionName="MusicEventModel.Store.GetRatingsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetRatingsList_Result">
+                <ScalarProperty Name="RatingsID" ColumnName="RatingsID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+                <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GroupChatDetail" FunctionName="MusicEventModel.Store.GroupChatDetail" />
+          <FunctionImportMapping FunctionImportName="GroupCreate" FunctionName="MusicEventModel.Store.GroupCreate" />
+          <FunctionImportMapping FunctionImportName="GroupJoinUserList" FunctionName="MusicEventModel.Store.GroupJoinUserList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GroupJoinUserList_Result">
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ISApprove" ColumnName="ISApprove" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GroupUserList" FunctionName="MusicEventModel.Store.GroupUserList" />
+          <FunctionImportMapping FunctionImportName="InviteGroup" FunctionName="MusicEventModel.Store.InviteGroup" />
+          <FunctionImportMapping FunctionImportName="JoinEventWithUser" FunctionName="MusicEventModel.Store.JoinEventWithUser" />
+          <FunctionImportMapping FunctionImportName="Login" FunctionName="MusicEventModel.Store.Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Login_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FbID" ColumnName="FbID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="IsEnterprice" ColumnName="IsEnterprice" />
+                <ScalarProperty Name="ApplyEnterprice" ColumnName="ApplyEnterprice" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="GroupPeople" ColumnName="GroupPeople" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OTPText" ColumnName="OTPText" />
+                <ScalarProperty Name="OTPCreatedOn" ColumnName="OTPCreatedOn" />
+                <ScalarProperty Name="IsFlySolo" ColumnName="IsFlySolo" />
+                <ScalarProperty Name="ISGroup" ColumnName="ISGroup" />
+                <ScalarProperty Name="IsCouple" ColumnName="IsCouple" />
+                <ScalarProperty Name="FaceBookFriends" ColumnName="FaceBookFriends" />
+                <ScalarProperty Name="MobileContact" ColumnName="MobileContact" />
+                <ScalarProperty Name="IsBusinessUser" ColumnName="IsBusinessUser" />
+                <ScalarProperty Name="BusinessLocation" ColumnName="BusinessLocation" />
+                <ScalarProperty Name="Bussinesslatitude" ColumnName="Bussinesslatitude" />
+                <ScalarProperty Name="Businesslongitude" ColumnName="Businesslongitude" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsSubAdmin" ColumnName="IsSubAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LoginFacebook" FunctionName="MusicEventModel.Store.LoginFacebook" />
+          <FunctionImportMapping FunctionImportName="Logout" FunctionName="MusicEventModel.Store.Logout" />
+          <FunctionImportMapping FunctionImportName="ManageRatings" FunctionName="MusicEventModel.Store.ManageRatings" />
+          <FunctionImportMapping FunctionImportName="MoveData" FunctionName="MusicEventModel.Store.MoveData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.MoveData_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="EventDiscription" ColumnName="EventDiscription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MyEvent" FunctionName="MusicEventModel.Store.MyEvent" />
+          <FunctionImportMapping FunctionImportName="NewChatPushNotification" FunctionName="MusicEventModel.Store.NewChatPushNotification">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.NewChatPushNotification_Result">
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+                <ScalarProperty Name="pendingrequest" ColumnName="pendingrequest" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PendingUserRequestList" FunctionName="MusicEventModel.Store.PendingUserRequestList" />
+          <FunctionImportMapping FunctionImportName="Push_AcceptDecline" FunctionName="MusicEventModel.Store.Push_AcceptDecline">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Push_AcceptDecline_Result">
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Push_AddToCalender" FunctionName="MusicEventModel.Store.Push_AddToCalender">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Push_AddToCalender_Result">
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Push_joinGroup" FunctionName="MusicEventModel.Store.Push_joinGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Push_joinGroup_Result">
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Push_NewRequest" FunctionName="MusicEventModel.Store.Push_NewRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.Push_NewRequest_Result">
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReGenrateOTP" FunctionName="MusicEventModel.Store.ReGenrateOTP" />
+          <FunctionImportMapping FunctionImportName="RegisterWithPhoneRequest" FunctionName="MusicEventModel.Store.RegisterWithPhoneRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.RegisterWithPhoneRequest_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FbID" ColumnName="FbID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserImagePath" ColumnName="UserImagePath" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="IsEnterprice" ColumnName="IsEnterprice" />
+                <ScalarProperty Name="ApplyEnterprice" ColumnName="ApplyEnterprice" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="GroupPeople" ColumnName="GroupPeople" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OTPText" ColumnName="OTPText" />
+                <ScalarProperty Name="OTPCreatedOn" ColumnName="OTPCreatedOn" />
+                <ScalarProperty Name="IsFlySolo" ColumnName="IsFlySolo" />
+                <ScalarProperty Name="ISGroup" ColumnName="ISGroup" />
+                <ScalarProperty Name="IsCouple" ColumnName="IsCouple" />
+                <ScalarProperty Name="FaceBookFriends" ColumnName="FaceBookFriends" />
+                <ScalarProperty Name="MobileContact" ColumnName="MobileContact" />
+                <ScalarProperty Name="IsBusinessUser" ColumnName="IsBusinessUser" />
+                <ScalarProperty Name="BusinessLocation" ColumnName="BusinessLocation" />
+                <ScalarProperty Name="Bussinesslatitude" ColumnName="Bussinesslatitude" />
+                <ScalarProperty Name="Businesslongitude" ColumnName="Businesslongitude" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsSubAdmin" ColumnName="IsSubAdmin" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RemoveFromGroup" FunctionName="MusicEventModel.Store.RemoveFromGroup" />
+          <FunctionImportMapping FunctionImportName="RemoveUserFromGroup" FunctionName="MusicEventModel.Store.RemoveUserFromGroup" />
+          <FunctionImportMapping FunctionImportName="SendMessage" FunctionName="MusicEventModel.Store.SendMessage" />
+          <FunctionImportMapping FunctionImportName="SerchEvent" FunctionName="MusicEventModel.Store.SerchEvent" />
+          <FunctionImportMapping FunctionImportName="ShareEvent" FunctionName="MusicEventModel.Store.ShareEvent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.ShareEvent_Result">
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="GroupChat" ColumnName="GroupChat" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="pendingrequest" ColumnName="pendingrequest" />
+                <ScalarProperty Name="isevent" ColumnName="isevent" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_UpdateProfile" FunctionName="MusicEventModel.Store.SP_UpdateProfile" />
+          <FunctionImportMapping FunctionImportName="SplitString" FunctionName="MusicEventModel.Store.SplitString" />
+          <FunctionImportMapping FunctionImportName="VerifyOTP" FunctionName="MusicEventModel.Store.VerifyOTP" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
