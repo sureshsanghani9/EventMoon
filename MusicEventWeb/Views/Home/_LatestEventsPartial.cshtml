@@ -1,0 +1,56 @@
+﻿@using MusicEventApp.ViewModels
+@using MusicEventLib.DataModals
+@model List<EventViewModal>
+
+<!--=================================================
+    events finder
+    ==================================================-->
+
+<section class="events-finder">
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="col-xs-12 col-md-3">
+                    <h2 class="text-uppercase">Latest Events.</h2>
+                </div>
+                <div class="col-xs-12 col-md-9">
+                    <div class="event-form text-right">
+                        <form>
+                            <div class="form-input search-keyword">
+                                <input id="keyword" type="text" placeholder="Search Keyword">
+                                <i class="icon fa fa-search"></i>
+                            </div>
+                            <div class="form-input select-date">
+                                <input id="starttime" type="text" class="xvDatePicker" placeholder="">
+                                <i class="icon fa fa-calendar"></i>
+                            </div>
+                            <div class="form-input select-location">
+                                <div class="custome-select">
+                                    <b class="fa fa-bars"></b>
+                                    <span>Select a Category</span>
+                                    <select id="MainCatID" class="search-cate notranslate">
+                                        @foreach (MainCategoryDataModel cat in (List<MainCategoryDataModel>)ViewBag.MainCategoryList)
+                                        {
+                                            <option value="@cat.MainCatID">@cat.MainCategoryName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="btnFindEvent" class="btn btn-default" type="button">fınd event</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="featured-events">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="store-grid text-uppercase text-bold" id="divLatestEventsList">
+                        @{ Html.RenderPartial("_LatestEventsListPartial"); }
+                    </div><!--album-grid-->
+                    <a class="btn btn-wide btn-grey text-uppercase text-bold" href='/Event'>View All</a>
+                </div><!--column-->
+            </div>
+        </div>
+    </div>
+</section>

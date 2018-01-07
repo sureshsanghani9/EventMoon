@@ -1532,5 +1532,52 @@ namespace MusicEventDataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("VerifyOTP", oTPParameter, passwordParameter);
         }
+    
+        public virtual int GetEventListBySearch(Nullable<int> mainCategoryId, string keyword, Nullable<int> pageNumber, Nullable<int> pageSize, string sort)
+        {
+            var mainCategoryIdParameter = mainCategoryId.HasValue ?
+                new ObjectParameter("MainCategoryId", mainCategoryId) :
+                new ObjectParameter("MainCategoryId", typeof(int));
+    
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("Keyword", keyword) :
+                new ObjectParameter("Keyword", typeof(string));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var sortParameter = sort != null ?
+                new ObjectParameter("Sort", sort) :
+                new ObjectParameter("Sort", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEventListBySearch", mainCategoryIdParameter, keywordParameter, pageNumberParameter, pageSizeParameter, sortParameter);
+        }
+    
+        public virtual ObjectResult<GetHeaderEvent_Result> GetHeaderEvent()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHeaderEvent_Result>("GetHeaderEvent");
+        }
+    
+        public virtual ObjectResult<GetTenLatestEventList_Result> GetTenLatestEventList(Nullable<int> mainCategoryId, string keyword, Nullable<System.DateTime> startdate)
+        {
+            var mainCategoryIdParameter = mainCategoryId.HasValue ?
+                new ObjectParameter("MainCategoryId", mainCategoryId) :
+                new ObjectParameter("MainCategoryId", typeof(int));
+    
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("Keyword", keyword) :
+                new ObjectParameter("Keyword", typeof(string));
+    
+            var startdateParameter = startdate.HasValue ?
+                new ObjectParameter("startdate", startdate) :
+                new ObjectParameter("startdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTenLatestEventList_Result>("GetTenLatestEventList", mainCategoryIdParameter, keywordParameter, startdateParameter);
+        }
     }
 }

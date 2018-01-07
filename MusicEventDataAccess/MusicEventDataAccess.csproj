@@ -76,6 +76,7 @@
     <Compile Include="Category.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\GlobalData.cs" />
     <Compile Include="EventDetail.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
@@ -100,7 +101,13 @@
     <Compile Include="GetEventListLast1hour_Result.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetHeaderEvent_Result.cs">
+      <DependentUpon>MusicEventDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetRatingsList_Result.cs">
+      <DependentUpon>MusicEventDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTenLatestEventList_Result.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Group.cs">

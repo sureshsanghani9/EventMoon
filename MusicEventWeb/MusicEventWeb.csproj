@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -54,6 +57,19 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.3.0\lib\net45\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.WebHost.3.3.0\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.3.0\lib\net45\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,21 +111,161 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\animations.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\colors\asphalt.css" />
+    <Content Include="assets\css\colors\green.css" />
+    <Content Include="assets\css\colors\orange.css" />
+    <Content Include="assets\css\colors\red.css" />
+    <Content Include="assets\css\colors\turquoise.css" />
+    <Content Include="assets\css\custommodal.css" />
+    <Content Include="assets\css\dl-menu.css" />
+    <Content Include="assets\css\flexslider.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\jquery.bxslider.css" />
+    <Content Include="assets\css\jquery.datetimepicker.css" />
+    <Content Include="assets\css\jquery.vegas.css" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\modal.css" />
+    <Content Include="assets\css\owl.carousel.css" />
+    <Content Include="assets\css\pixeden-fonts.css" />
+    <Content Include="assets\css\prettyPhoto.css" />
+    <Content Include="assets\demo-data\1.jpg" />
+    <Content Include="assets\demo-data\2.jpg" />
+    <Content Include="assets\demo-data\3.jpg" />
+    <Content Include="assets\demo-data\4.jpg" />
+    <Content Include="assets\demo-data\a1.jpg" />
+    <Content Include="assets\demo-data\a10.jpg" />
+    <Content Include="assets\demo-data\a11.jpg" />
+    <Content Include="assets\demo-data\a12.jpg" />
+    <Content Include="assets\demo-data\a13.jpg" />
+    <Content Include="assets\demo-data\a14.jpg" />
+    <Content Include="assets\demo-data\a15.jpg" />
+    <Content Include="assets\demo-data\a16.jpg" />
+    <Content Include="assets\demo-data\a17.jpg" />
+    <Content Include="assets\demo-data\a18.jpg" />
+    <Content Include="assets\demo-data\a2.jpg" />
+    <Content Include="assets\demo-data\a3.jpg" />
+    <Content Include="assets\demo-data\a4.jpg" />
+    <Content Include="assets\demo-data\a5.jpg" />
+    <Content Include="assets\demo-data\a6.jpg" />
+    <Content Include="assets\demo-data\a7.jpg" />
+    <Content Include="assets\demo-data\a8.jpg" />
+    <Content Include="assets\demo-data\a9.jpg" />
+    <Content Include="assets\demo-data\demo-cover.jpg" />
+    <Content Include="assets\demo-data\demo.wav" />
+    <Content Include="assets\demo-data\ev1.jpg" />
+    <Content Include="assets\demo-data\ev10.jpg" />
+    <Content Include="assets\demo-data\ev11.jpg" />
+    <Content Include="assets\demo-data\ev12.jpg" />
+    <Content Include="assets\demo-data\ev13.jpg" />
+    <Content Include="assets\demo-data\ev14.jpg" />
+    <Content Include="assets\demo-data\ev2.jpg" />
+    <Content Include="assets\demo-data\ev3.jpg" />
+    <Content Include="assets\demo-data\ev4.jpg" />
+    <Content Include="assets\demo-data\ev5.jpg" />
+    <Content Include="assets\demo-data\ev6.jpg" />
+    <Content Include="assets\demo-data\ev7.jpg" />
+    <Content Include="assets\demo-data\ev8.jpg" />
+    <Content Include="assets\demo-data\ev9.jpg" />
+    <Content Include="assets\demo-data\n1.jpg" />
+    <Content Include="assets\demo-data\n2.jpg" />
+    <Content Include="assets\demo-data\p1.jpg" />
+    <Content Include="assets\demo-data\p2.jpg" />
+    <Content Include="assets\demo-data\p3.png" />
+    <Content Include="assets\demo-data\parallax.jpg" />
+    <Content Include="assets\demo-data\parallax1.jpg" />
+    <Content Include="assets\demo-data\s1.jpg" />
+    <Content Include="assets\demo-data\s2.jpg" />
+    <Content Include="assets\demo-data\slide1.jpg" />
+    <Content Include="assets\demo-data\slide2.jpg" />
+    <Content Include="assets\demo-data\slide3.jpg" />
+    <Content Include="assets\demo-data\team.jpg" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\playercontrols.svg" />
+    <Content Include="assets\img\basic\ajax-loader.gif" />
+    <Content Include="assets\img\basic\bx_loader.gif" />
+    <Content Include="assets\img\basic\controls.png" />
+    <Content Include="assets\img\basic\ele1.png" />
+    <Content Include="assets\img\basic\ele2.png" />
+    <Content Include="assets\img\basic\header.png" />
+    <Content Include="assets\img\basic\itunesBadge.svg" />
+    <Content Include="assets\img\basic\left-arrow.png" />
+    <Content Include="assets\img\basic\logo.png" />
+    <Content Include="assets\img\basic\plus.png" />
+    <Content Include="assets\img\basic\right-arrow.png" />
+    <Content Include="assets\img\logo\MusicpadLogo.PNG" />
+    <Content Include="assets\js\ajaxify.min.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\custommodal.js" />
+    <Content Include="assets\js\Events.js" />
+    <Content Include="assets\js\isotope.pkgd.min.js" />
+    <Content Include="assets\js\jplayer\jplayer.playlist.min.js" />
+    <Content Include="assets\js\jplayer\jquery.jplayer.js" />
+    <Content Include="assets\js\jplayer\jquery.jplayer.min.js" />
+    <Content Include="assets\js\jplayer\jquery.jplayer.swf" />
+    <Content Include="assets\js\jquery.bxslider.min.js" />
+    <Content Include="assets\js\jquery.datetimepicker.full.min.js" />
+    <Content Include="assets\js\jquery.dlmenu.js" />
+    <Content Include="assets\js\jquery.downCount.js" />
+    <Content Include="assets\js\jquery.flexslider-min.js" />
+    <Content Include="assets\js\jquery.js" />
+    <Content Include="assets\js\jquery.stellar.min.js" />
+    <Content Include="assets\js\jquery.sticky.js" />
+    <Content Include="assets\js\jquery.twbsPagination.min.js" />
+    <Content Include="assets\js\jquery.waitforimages.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\masonry.pkgd.min.js" />
+    <Content Include="assets\js\modal.js" />
+    <Content Include="assets\js\modernizr-2.6.2-respond-1.1.0.min.js" />
+    <Content Include="assets\js\owl.carousel.min.js" />
+    <Content Include="assets\js\packery.pkgd.min.js" />
+    <Content Include="assets\js\resize.js" />
+    <Content Include="assets\js\tweetie.min.js" />
+    <Content Include="assets\js\wavesurfer\wavesurfer.min.js" />
+    <Content Include="assets\js\wavesurfer\wavesurfer.swf" />
+    <Content Include="assets\js\wavesurfer\wavesurfer.swf.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectResolver.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AutoMapperProfile .cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EventViewModal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\playercontrols.eot" />
+    <Content Include="assets\fonts\playercontrols.ttf" />
+    <Content Include="assets\fonts\playercontrols.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_HeaderPartial.cshtml" />
+    <Content Include="Views\Shared\_TweetsPartial.cshtml" />
+    <Content Include="Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Views\Home\_EventGalleryPartial.cshtml" />
+    <Content Include="Views\Home\_ContactUsPartial.cshtml" />
+    <Content Include="Views\Home\_HeaderEventPartial.cshtml" />
+    <Content Include="Views\Home\_LatestEventsPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginModalPartial.cshtml" />
+    <Content Include="Views\Home\_LatestEventsListPartial.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\_EventListPartial.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\_EventDetailsSimilarEventsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,8 +275,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MusicEventLib\MusicEventLib.csproj">

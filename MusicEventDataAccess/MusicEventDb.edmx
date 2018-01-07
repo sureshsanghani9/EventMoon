@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MusicEventModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MusicEventModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="Id" />
@@ -474,6 +474,13 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Parameter Name="userid" Type="int" Mode="In" />
           <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetEventListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MainCategoryId" Type="int" Mode="In" />
+          <Parameter Name="Keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="Sort" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetEventListLast1hour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetEventnearME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
@@ -494,6 +501,7 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetHeaderEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetMaxCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetMyChatList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
@@ -501,6 +509,11 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
         </Function>
         <Function Name="GetRatingsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="eventId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTenLatestEventList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MainCategoryId" Type="int" Mode="In" />
+          <Parameter Name="Keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="startdate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GroupChatDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
@@ -718,8 +731,7 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
     FROM [dbo].[NewEvent] AS [NewEvent]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MusicEventModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -970,10 +982,10 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <EntitySet Name="Users_Groups" EntityType="Self.Users_Groups" />
           <EntitySet Name="NewEvents" EntityType="Self.NewEvent" />
           <FunctionImport Name="fnNTextToIntTable" IsComposable="true" ReturnType="Collection(MusicEventModel.fnNTextToIntTable_Result)">
-            <Parameter Name="Data" Mode="In" Type="String" />
+          <Parameter Name="Data" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fnNTextTostringTable" IsComposable="true" ReturnType="Collection(MusicEventModel.fnNTextTostringTable_Result)">
-            <Parameter Name="Data" Mode="In" Type="String" />
+          <Parameter Name="Data" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AcceptDecline" ReturnType="Collection(String)">
             <Parameter Name="userId" Mode="In" Type="Int32" />
@@ -1040,14 +1052,14 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
             <Parameter Name="images" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Admin_GetCategoryList" ReturnType="Collection(MusicEventModel.Admin_GetCategoryList_Result)">
-            <Parameter Name="status" Mode="In" Type="Int32" />
+          <Parameter Name="status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Admin_GetDashboardCount" />
           <FunctionImport Name="Admin_MainGetCategoryList" ReturnType="Collection(MusicEventModel.Admin_MainGetCategoryList_Result)">
-            <Parameter Name="status" Mode="In" Type="Int32" />
+          <Parameter Name="status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Admin_UsersList" ReturnType="Collection(MusicEventModel.Admin_UsersList_Result)">
-            <Parameter Name="status" Mode="In" Type="Int32" />
+          <Parameter Name="status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AdvertiseList">
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
@@ -1211,7 +1223,7 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
             <Parameter Name="accesstoken" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetRatingsList" ReturnType="Collection(MusicEventModel.GetRatingsList_Result)">
-            <Parameter Name="eventId" Mode="In" Type="Int32" />
+          <Parameter Name="eventId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GroupChatDetail" ReturnType="Collection(String)">
             <Parameter Name="userID" Mode="In" Type="Int32" />
@@ -1231,7 +1243,7 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
             <Parameter Name="accesstoken" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GroupJoinUserList" ReturnType="Collection(MusicEventModel.GroupJoinUserList_Result)">
-            <Parameter Name="groupid" Mode="In" Type="Int32" />
+          <Parameter Name="groupid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GroupUserList" ReturnType="Collection(String)">
             <Parameter Name="userId" Mode="In" Type="Int32" />
@@ -1287,7 +1299,7 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
             <Parameter Name="reviewText" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="MoveData" ReturnType="Collection(MusicEventModel.MoveData_Result)">
-            <Parameter Name="maxid" Mode="In" Type="Int32" />
+          <Parameter Name="maxid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MyEvent" ReturnType="Collection(String)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
@@ -1386,6 +1398,19 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <FunctionImport Name="VerifyOTP" ReturnType="Collection(String)">
             <Parameter Name="OTP" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEventListBySearch">
+            <Parameter Name="MainCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="Keyword" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="Sort" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetHeaderEvent" ReturnType="Collection(MusicEventModel.GetHeaderEvent_Result)" />
+          <FunctionImport Name="GetTenLatestEventList" ReturnType="Collection(MusicEventModel.GetTenLatestEventList_Result)">
+            <Parameter Name="MainCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="Keyword" Mode="In" Type="String" />
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Admin_AdvertiseList_Result">
@@ -1780,6 +1805,62 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Property Type="Int32" Name="pendingrequest" Nullable="true" />
           <Property Type="Int32" Name="isevent" Nullable="false" />
           <Property Type="String" Name="appname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetHeaderEvent_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetTenLatestEventList_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2557,6 +2638,71 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <FunctionImportMapping FunctionImportName="SP_UpdateProfile" FunctionName="MusicEventModel.Store.SP_UpdateProfile" />
           <FunctionImportMapping FunctionImportName="SplitString" FunctionName="MusicEventModel.Store.SplitString" />
           <FunctionImportMapping FunctionImportName="VerifyOTP" FunctionName="MusicEventModel.Store.VerifyOTP" />
+          <FunctionImportMapping FunctionImportName="GetEventListBySearch" FunctionName="MusicEventModel.Store.GetEventListBySearch" />
+          <FunctionImportMapping FunctionImportName="GetHeaderEvent" FunctionName="MusicEventModel.Store.GetHeaderEvent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetHeaderEvent_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTenLatestEventList" FunctionName="MusicEventModel.Store.GetTenLatestEventList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetTenLatestEventList_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

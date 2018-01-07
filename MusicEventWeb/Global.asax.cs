@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MusicEventApp.App_Start;
+using MusicEventLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,10 @@ namespace MusicEventApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            DependencyResolver.SetResolver(new NinjectResolver());
+            AutoMapper.Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
+
         }
     }
 }

@@ -1,0 +1,86 @@
+﻿@using MusicEventApp.ViewModels
+@using MusicEventLib.DataModals
+@model List<EventViewModal>
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="ajaxArea">
+    <!--=================================
+    Albums
+    =================================-->
+    <section>
+        <div class="container mt-30 mb-30 hidden-xs">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="multiSearchWrapper">
+                        <div class="multiSearchWrapper-inner">
+                            <div class="custome-select clearfix">
+                                <b class="fa fa-angle-down"></b>
+                                <span>Song Category</span>
+                                <select name="albumType" id="MainCatID">
+                                    <option value="0">Select a Category</option>
+                                    @foreach (MainCategoryDataModel cat in (List<MainCategoryDataModel>)ViewBag.MainCategoryList)
+                                    {
+                                        <option value="@cat.MainCatID">@cat.MainCategoryName</option>
+                                    }
+                                </select>
+                            </div>
+                            <input placeholder="Search album" type="text" id="keyword"/>
+                        </div><!--inner-->
+                        <button class="btn btn-default" id="btnSearchEvent"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div><!--container-->
+
+        <div class="container">
+            <div class="search-filters text-uppercase text-bold">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-5">
+                        <div class="searched-for" data-before="Results For : ">
+                            <span class="s-keyword" id="lblSearchFor">Hip-Hop</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-7 text-right">
+                        <div class="search-actions">
+                            <ul class="sort">
+                                <li class="active" sort="LATEST" ><a href="#">Latest</a></li>
+                                <li sort="TRENDING" ><a href="#">Trending</a></li>
+                            </ul>
+                            <ul style="display:none;">
+                                <li class="active"><a href="#">Week</a></li>
+                                <li><a href="#">Month</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!--row-->
+        </div><!--container-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="store-grid text-uppercase text-bold" id="divEventPage">
+                    </div><!--album-grid-->
+                    <input type="hidden" id="hdnCurrentPage" name="hdnCurrentPage" value="1" /> 
+                    <input type="hidden" id="hdnPageSize" name="hdnPageSize" value="20" /> 
+                </div><!--column-->
+            </div><!--row-->
+        </div><!--container-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <nav>
+                        <ul class="pagination" data-before="Use pagination to find out more cool products &raquo;" id="EventsPagination">
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+

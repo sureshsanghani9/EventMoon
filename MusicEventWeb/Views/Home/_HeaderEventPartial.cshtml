@@ -1,0 +1,79 @@
+﻿@using MusicEventApp.ViewModels
+@{ 
+    EventViewModal HeaderEvent = (EventViewModal)ViewBag.HeaderEvent;
+}
+
+<!--=================================
+    Events Countdown
+    =================================-->
+
+<section class="events-countdown parallax parallax_five parallax_overlay text-bold" data-stellar-background-ratio="0.5">
+    <div class="parallax_inner">
+        <div class="albumAction">
+            <div class="container">
+                <a class="btn btn-dark text-uppercase text-bold" href="/Event/@HeaderEvent.EventID" >
+                    <i class="fa fa-play"></i> Preview
+                </a>
+                <a class="btn btn-default text-uppercase text-bold" href="@HeaderEvent.TicketUrl">
+                    <i class="fa fa-cloud-download"></i> Buy Tickets
+                </a>
+            </div>
+        </div>
+        <div class="event">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3 slide-visual">
+                        <figure class="">
+                            <img src="@HeaderEvent.Image" alt="" style="min-width:251px;min-height:251px;" />
+                        </figure>
+                    </div><!--column-->
+                    <div class="col-xs-12 col-sm-6 col-md-6 about-album">
+                        <div class="event-details">
+                            <h2>@HeaderEvent.EventName</h2>
+                            <h6>@HeaderEvent.StartDate.Value.ToString()</h6>
+                            <p>
+                                @HeaderEvent.location
+                            </p>
+                            
+                            <ul class="countdown clearfix mt-10">
+                                <li>
+                                    <div class="text">
+                                        <span id="startdays" class="days">20</span>
+                                        <p class="days_ref">days</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="text">
+                                        <span id="starthours" class="hours">10</span>
+                                        <p class="hours_ref">hours</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="text">
+                                        <span id="startminutes" class="minutes">30</span>
+                                        <p class="minutes_ref">minutes</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="text">
+                                        <span id="startseconds" class="seconds">00</span>
+                                        <p class="seconds_ref">seconds</p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div><!--column-->
+                </div><!--row-->
+            </div>
+        </div>
+
+        @Html.Hidden("Startdate", HeaderEvent.StartDate)
+        @Html.Hidden("Enddate", HeaderEvent.EndDate)
+
+
+    </div>
+</section>
