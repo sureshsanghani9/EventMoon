@@ -12,6 +12,7 @@ namespace MusicEventLib.IServices
     {
         List<EventDataModal> GetTenLatestEvents(int MainCategoryId, string Keyword, DateTime? startdate);
         EventDataModal GetHeaderEvent();
+        EventDataModal GetEventDetailsById(int EventID);
         EventPageDataModal GetEventListBySearch(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort);
 
     }

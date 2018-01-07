@@ -16,6 +16,15 @@ namespace MusicEventLib.Services
 {
     public class EventService : IEventService
     {
+        public EventDataModal GetEventDetailsById(int EventID)
+        {
+            using (var db = new MusicEventEntities())
+            {
+                var evt = db.GetEventDetailsById(EventID).ToList().FirstOrDefault();
+                return Mapper.Map<GetEventDetailsById_Result, EventDataModal>(evt);
+            }
+        }
+
         public EventPageDataModal GetEventListBySearch(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort)
         {
             using (var db = new MusicEventEntities())

@@ -20,6 +20,11 @@ namespace MusicEventApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            List<MetaDataViewModel> MetaData = new List<MetaDataViewModel> {
+                new MetaDataViewModel { name= "description", content="MusicEvent is great place to browse any music event anywhere in world. You can search all recent music events, programs, concert by well know celebrities, musicians, singers using our easy search options. you can also book for events, programs, concert easy steps." } ,
+                new MetaDataViewModel { name = "keywords", content = "MusicEvent, Music, Program, Concert, Party, Singer, Celebrities, Musician, Singer, USA" } };
+            ViewBag.MetaData = MetaData;
+
             List<EventDataModal> EventsData = _EventService.GetTenLatestEvents(0, "", null);
             List<EventViewModal> Events = Mapper.Map<List<EventDataModal>, List<EventViewModal>>(EventsData);
 

@@ -7,13 +7,13 @@
         <figure>
             <img width="265" height="265" src="@evt.Image" style="min-width:222px;min-height:222px;">
             <figcaption>
-                <a href="Event/@evt.EventID" class="btn btn-grey"><i class="fa fa-ticket "></i> View Event</a>
+                <a href="Event/Details/@evt.EventID" class="btn btn-grey"><i class="fa fa-ticket "></i> View Event</a>
             </figcaption>
         </figure>
         <div class="product-info">
             <h3 title="@evt.EventName">@evt.EventName</h3>
             <h6 title="Start Time"><i class="fa fa-clock-o"></i>@evt.StartDate.Value.ToString()</h6>
-            <span class="price-tag" title="@evt.ViewCount"><i class="fa fa-eye"></i></span>
+            <span class="price-tag" title="@evt.ViewCount" style="display:none;"><i class="fa fa-eye"></i></span>
         </div>
     </div> <!--store-product-->
 }

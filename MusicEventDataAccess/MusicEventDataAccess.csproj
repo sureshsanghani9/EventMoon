@@ -98,6 +98,9 @@
     <Compile Include="GetEventDatewise_Result.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetEventDetailsById_Result.cs">
+      <DependentUpon>MusicEventDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetEventListLast1hour_Result.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>

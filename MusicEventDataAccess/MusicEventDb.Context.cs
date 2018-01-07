@@ -1579,5 +1579,14 @@ namespace MusicEventDataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTenLatestEventList_Result>("GetTenLatestEventList", mainCategoryIdParameter, keywordParameter, startdateParameter);
         }
+    
+        public virtual ObjectResult<GetEventDetailsById_Result> GetEventDetailsById(Nullable<int> eventID)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEventDetailsById_Result>("GetEventDetailsById", eventIDParameter);
+        }
     }
 }

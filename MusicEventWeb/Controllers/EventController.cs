@@ -22,6 +22,11 @@ namespace MusicEventApp.Controllers
         // GET: Event
         public ActionResult Index()
         {
+            List<MetaDataViewModel> MetaData = new List<MetaDataViewModel> {
+                new MetaDataViewModel { name= "description", content="List of MusicEvents. MusicEvent is great place to browse any music event anywhere in world. You can search all recent music events, programs, concert by well know celebrities, musicians, singers using our easy search options. you can also book for events, programs, concert easy steps." } ,
+                new MetaDataViewModel { name = "keywords", content = "MusicEvent, Music, Program, Concert, Party, Singer, Celebrities, Musician, Singer, USA" } };
+            ViewBag.MetaData = MetaData;
+
             ViewBag.MainCategoryList = GlobalDataHelper.GetMainCategoryList();
 
             return View();
@@ -37,9 +42,17 @@ namespace MusicEventApp.Controllers
             return PartialView("_EventListPartial", Events);
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View();
+            EventDataModal evtdata = _EventService.GetEventDetailsById(id);
+            EventViewModal evt = Mapper.Map<EventDataModal, EventViewModal>(evtdata);
+
+            List<MetaDataViewModel> MetaData = new List<MetaDataViewModel> {
+                new MetaDataViewModel { name= "description", content="Music Event "+ evt.EventName +" at " + evt.location + " on " + evt.StartDate.Value.ToString() + ". Book ticket now!" } ,
+                new MetaDataViewModel { name = "keywords", content = "MusicEvent, Music, Program, Concert, Party, Singer, Celebrities, Musician, Singer, USA, "+ evt.EventName +", " + evt.location + "" } };
+            ViewBag.MetaData = MetaData;
+
+            return View(evt);
         }
     }
 }

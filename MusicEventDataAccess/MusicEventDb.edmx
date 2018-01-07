@@ -474,6 +474,9 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Parameter Name="userid" Type="int" Mode="In" />
           <Parameter Name="accesstoken" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetEventDetailsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetEventListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MainCategoryId" Type="int" Mode="In" />
           <Parameter Name="Keyword" Type="nvarchar" Mode="In" />
@@ -1412,6 +1415,9 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
             <Parameter Name="Keyword" Mode="In" Type="String" />
             <Parameter Name="startdate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="GetEventDetailsById" ReturnType="Collection(MusicEventModel.GetEventDetailsById_Result)">
+          <Parameter Name="EventID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Admin_AdvertiseList_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1835,6 +1841,34 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Property Type="Int32" Name="MainCatID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetTenLatestEventList_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEventDetailsById_Result">
           <Property Type="Int32" Name="EventID" Nullable="false" />
           <Property Type="Int32" Name="UserID" Nullable="true" />
           <Property Type="Int32" Name="CategoryID" Nullable="false" />
@@ -2674,6 +2708,38 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <FunctionImportMapping FunctionImportName="GetTenLatestEventList" FunctionName="MusicEventModel.Store.GetTenLatestEventList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MusicEventModel.GetTenLatestEventList_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEventDetailsById" FunctionName="MusicEventModel.Store.GetEventDetailsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetEventDetailsById_Result">
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />

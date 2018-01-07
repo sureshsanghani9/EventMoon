@@ -44,28 +44,37 @@ jQuery(function($) {
     /*====================
     Main
     =====================*/
-    function contactemaps(selector_map, address, type, zoom_lvl, map_theme) {
+    function contactemaps(selector_map, address, type, zoom_lvl, map_theme, lat, lng) {
+        var latlng = new google.maps.LatLng(lat, lng);
         var map = new google.maps.Map(document.getElementById(selector_map), {
             mapTypeId: google.maps.MapTypeId.type,
             scrollwheel: false,
             draggable: false,
             zoom: zoom_lvl,
             styles: map_theme,
+            center: latlng
         });
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-                'address': address
-            },
-            function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    new google.maps.Marker({
-                        position: results[0].geometry.location,
-                        map: map,
-                        /* icon: map_pin*/
-                    });
-                    map.setCenter(results[0].geometry.location);
-                }
-            });
+
+        new google.maps.Marker({
+            position: latlng,
+            map: map,
+            /* icon: map_pin*/
+        });
+
+        //var geocoder = new google.maps.Geocoder();
+        //geocoder.geocode({
+        //        'address': address
+        //    },
+        //    function(results, status) {
+        //        if (status === google.maps.GeocoderStatus.OK) {
+        //            new google.maps.Marker({
+        //                position: results[0].geometry.location,
+        //                map: map,
+        //                /* icon: map_pin*/
+        //            });
+        //            map.setCenter(results[0].geometry.location);
+        //        }
+        //    });
     }
 
     function suonoApp() {
@@ -148,7 +157,7 @@ jQuery(function($) {
         //        dateFormat: '%b. %d, %Y',
         //        template: '{{tweet}} <time class="date">{{date}}</time>',
         //        count: 3,
-        //        apiPath: "assets/php/tweet_api/tweet.php",
+        //        apiPath: "~/assets/php/tweet_api/tweet.php",
         //    }, function() {
         //        $(".tweet ul").addClass("tweet_slider owl-carousel owl-theme");
         //        $(".tweet_slider").owlCarousel({
@@ -278,7 +287,7 @@ jQuery(function($) {
                     cssSelectorAncestor: temp_wrap,
                     volume: 0.5,
                     supplied: "mp3",
-                    swfPath: "assets/js/jPlayer/jquery.jplayer.swf",
+                    swfPath: "~/assets/js/jPlayer/jquery.jplayer.swf",
                 });
             });
         }
@@ -306,7 +315,7 @@ jQuery(function($) {
                     cssSelectorAncestor: temp_wrap,
                     volume: 0.5,
                     supplied: "mp3",
-                    swfPath: "assets/js/jPlayer/jquery.jplayer.swf",
+                    swfPath: "~/assets/js/jPlayer/jquery.jplayer.swf",
                 });
             });
         }
@@ -364,7 +373,7 @@ jQuery(function($) {
 				} else {
 					$.ajax({
 						type: "POST",
-						url: "assets/php/submit.php",
+						url: "~/assets/php/submit.php",
 						data: dataString,
 						success: function () {
 							$('#contactForm').slideUp();
@@ -388,6 +397,8 @@ jQuery(function($) {
                     mapAddress = $this.data('address'),
                     mapType = $this.data('maptype'),
                     zoomLvl = $this.data('zoomlvl'),
+                    lat = $this.data('lat'),
+                    lng = $this.data('lng'),
                     map_theme_control = $this.data('theme'),
                     map_theme;
 
@@ -743,7 +754,7 @@ jQuery(function($) {
                     default:
                         map_theme = [];
                 }
-                contactemaps(selector_map, mapAddress, mapType, zoomLvl, map_theme);
+                contactemaps(selector_map, mapAddress, mapType, zoomLvl, map_theme, lat, lng);
 
             });
         }
@@ -851,7 +862,7 @@ jQuery(function($) {
                     loopOnPrevious: true
                 }
             }, {
-                swfPath: "assets/js/jPlayer/jquery.jplayer.swf",
+                swfPath: "~/assets/js/jPlayer/jquery.jplayer.swf",
                 supplied: "mp3",
                 displayTime: 'fast',
                 addTime: 'fast',
@@ -897,7 +908,7 @@ jQuery(function($) {
                 }
             },
             cssSelectorAncestor: "#audio-player-radio",
-            swfPath: "assets/js/jPlayer/jquery.jplayer.swf",
+            swfPath: "~/assets/js/jPlayer/jquery.jplayer.swf",
             preload: "none"
         });
     }

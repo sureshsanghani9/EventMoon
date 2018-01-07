@@ -14,6 +14,8 @@ namespace MusicEventLib
         public AutoMapperProfile()
         {
             CreateMap<GetTenLatestEventList_Result, EventDataModal>();
+            CreateMap<GetEventDetailsById_Result, EventDataModal>();
+            CreateMap<GetHeaderEvent_Result, EventDataModal>();
             CreateMap<MainCategory, MainCategoryDataModel>();
             CreateMap<Category, Category>();
         }

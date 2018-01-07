@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    if ($(document).find("title").text() == "Home")
+    if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Details")
     {
         // Set the date we're counting down to
         countDownDate = new Date($("#Startdate").val()).getTime();
@@ -15,7 +15,7 @@ $(document).ready(function () {
         var startdate = $("#starttime").val();
         $('.pageLoader').addClass("active");
         $.ajax({
-            url: 'Home/LatestEventList',
+            url: '../Home/LatestEventList',
             type: 'POST',
             cache: false,
             data: { MainCategoryId: MainCategoryId, Keyword: Keyword, startdate: startdate }
@@ -106,7 +106,7 @@ function RefreshEventPage() {
     $("#lblSearchFor").html($("#MainCatID option:selected").text());
     $('.pageLoader').addClass("active");
     $.ajax({
-        url: 'Event/EventList',
+        url: '../Event/EventList',
         type: 'POST',
         cache: false,
         data: { MainCategoryId: MainCategoryId, Keyword: Keyword, PageNumber: PageNumber, PageSize: PageSize, Sort: Sort }
