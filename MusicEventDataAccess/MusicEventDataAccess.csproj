@@ -77,6 +77,9 @@
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\GlobalData.cs" />
+    <Compile Include="EmailSubscriber.cs">
+      <DependentUpon>MusicEventDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="EventDetail.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
@@ -93,6 +96,9 @@
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
     <Compile Include="ForgetPassword_Result.cs">
+      <DependentUpon>MusicEventDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllNewEvents_Result.cs">
       <DependentUpon>MusicEventDb.tt</DependentUpon>
     </Compile>
     <Compile Include="GetEventDatewise_Result.cs">

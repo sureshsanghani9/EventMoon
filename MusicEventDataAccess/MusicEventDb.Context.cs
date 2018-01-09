@@ -41,6 +41,7 @@ namespace MusicEventDataAccess
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Users_Groups> Users_Groups { get; set; }
         public virtual DbSet<NewEvent> NewEvents { get; set; }
+        public virtual DbSet<EmailSubscriber> EmailSubscribers { get; set; }
     
         [DbFunction("MusicEventEntities", "fnNTextToIntTable")]
         public virtual IQueryable<fnNTextToIntTable_Result> fnNTextToIntTable(string data)
@@ -1587,6 +1588,11 @@ namespace MusicEventDataAccess
                 new ObjectParameter("EventID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEventDetailsById_Result>("GetEventDetailsById", eventIDParameter);
+        }
+    
+        public virtual ObjectResult<GetAllNewEvents_Result> GetAllNewEvents()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllNewEvents_Result>("GetAllNewEvents");
         }
     }
 }

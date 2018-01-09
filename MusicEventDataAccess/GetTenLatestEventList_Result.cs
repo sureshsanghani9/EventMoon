@@ -39,5 +39,6 @@ namespace MusicEventDataAccess
         public string CategoryName { get; set; }
         public string MainCategoryName { get; set; }
         public Nullable<int> MainCatID { get; set; }
+        public Nullable<int> IsNew { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace MusicEventApp.App_Start
         private void AddBindings()
         {
             this._kernel.Bind<IEventService>().To<EventService>(); // Registering Types    
+            this._kernel.Bind<ISubscribeService>().To<SubscribeService>(); // Registering Types    
         }
     }
 }

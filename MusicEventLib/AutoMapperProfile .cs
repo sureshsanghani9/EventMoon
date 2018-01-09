@@ -16,8 +16,11 @@ namespace MusicEventLib
             CreateMap<GetTenLatestEventList_Result, EventDataModal>();
             CreateMap<GetEventDetailsById_Result, EventDataModal>();
             CreateMap<GetHeaderEvent_Result, EventDataModal>();
+            CreateMap<GetAllNewEvents_Result, EventDataModal>();
             CreateMap<MainCategory, MainCategoryDataModel>();
-            CreateMap<Category, Category>();
+            CreateMap<Category, CategoryDataModel>();
+            CreateMap<EmailSubscriber, EmailSubscriberDataModal>();
+            CreateMap<NewEvent, EventDataModal>();
         }
     }
 }

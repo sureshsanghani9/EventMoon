@@ -14,6 +14,7 @@ namespace MusicEventApp
         {
             MusicEventLib.AutoMapperProfile LibProfile = new MusicEventLib.AutoMapperProfile();
             CreateMap<EventDataModal, EventViewModal>();
+            CreateMap<EmailSubscriberDataModal, EmailSubscriberViewModal>();
         }
     }
 }

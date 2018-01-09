@@ -37,5 +37,6 @@ namespace MusicEventDataAccess
         public bool IsTmaster { get; set; }
         public Nullable<int> MasterEventID { get; set; }
         public Nullable<long> ViewCount { get; set; }
+        public Nullable<int> IsNew { get; set; }
     }
 }

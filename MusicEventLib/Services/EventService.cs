@@ -16,6 +16,15 @@ namespace MusicEventLib.Services
 {
     public class EventService : IEventService
     {
+        public List<EventDataModal> GetAllNewEvents()
+        {
+            using (var db = new MusicEventEntities())
+            {
+                var events = db.GetAllNewEvents().ToList();
+                return Mapper.Map<List<GetAllNewEvents_Result>, List<EventDataModal>>(events);
+            }
+        }
+
         public EventDataModal GetEventDetailsById(int EventID)
         {
             using (var db = new MusicEventEntities())
@@ -73,6 +82,15 @@ namespace MusicEventLib.Services
             {
                 var events = db.GetTenLatestEventList(MainCategoryId, Keyword, startdate).ToList();
                 return Mapper.Map<List<GetTenLatestEventList_Result>, List<EventDataModal>>(events);
+            }
+        }
+
+        public void SetEmailSentFlag(List<int> Events)
+        {
+            using (var db = new MusicEventEntities())
+            {
+                db.NewEvents.Where(e => Events.Contains(e.EventID)).ToList().ForEach(e => e.IsNew = 0);
+                db.SaveChanges();
             }
         }
     }

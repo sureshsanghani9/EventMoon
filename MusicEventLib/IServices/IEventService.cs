@@ -14,6 +14,8 @@ namespace MusicEventLib.IServices
         EventDataModal GetHeaderEvent();
         EventDataModal GetEventDetailsById(int EventID);
         EventPageDataModal GetEventListBySearch(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort);
+        List<EventDataModal> GetAllNewEvents();
+        void SetEmailSentFlag(List<int> Events);
 
     }
 }

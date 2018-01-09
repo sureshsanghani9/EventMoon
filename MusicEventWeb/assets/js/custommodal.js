@@ -32,10 +32,27 @@ $(function () {
                 break;
             case "lost-form":
                 var $ls_email = $('#lost_email').val();
-                if ($ls_email == "ERROR") {
-                    msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
+                if (!validateEmail($ls_email)) {
+                    msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Invalid Email!");
                 } else {
-                    msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
+                    $('.pageLoader').addClass("active");
+                    $.ajax({
+                        url: '../Subscribe/SubscribeEmail',
+                        type: 'GET',
+                        cache: false,
+                        dataType: "json",
+                        data: { Email: $ls_email }
+                    }).done(function (result) {
+                        if (result.Code == 1)
+                        {
+                            msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", result.Message);
+                        }
+                        else
+                        {
+                            msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", result.Message);
+                        }
+                        $('.pageLoader').removeClass("active");
+                    });
                 }
                 return false;
                 break;

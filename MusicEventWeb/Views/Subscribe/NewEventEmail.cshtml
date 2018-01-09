@@ -1,0 +1,693 @@
+﻿@using MusicEventApp.ViewModels
+@using System.Configuration;
+@model EventViewModal
+@{ 
+    string MySiteURL = ConfigurationManager.AppSettings["MySiteURL"] != null ? ConfigurationManager.AppSettings["MySiteURL"].ToString() : "http://localhost:65272/";
+    string EventURL = MySiteURL + "/Event/Details/" + Model.EventID;
+
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <title>Responsive E-mail Template</title>
+    <style type="text/css">
+
+/* Resets: see reset.css for details */
+.ReadMsgBody { width: 100%; background-color: #ffffff;}
+.ExternalClass {width: 100%; background-color: #ffffff;}
+.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height:100%;}
+html{width: 100%;margin:0; padding:0; }
+body {-webkit-text-size-adjust:none; -ms-text-size-adjust:none; margin:0; padding:0; -webkit-font-smoothing: antialiased;}
+table {border-spacing:0;}
+img{display:block !important; outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; height: auto; line-height: 100%;}
+p{padding: 0; margin: 0;}
+br { line-height:0 !important; }
+div, p, span, strong, b, em, i, a, li, td {
+            -webkit-text-size-adjust: none;
+        }
+.b-letter__body {
+  background:#cccccc !important;
+}
+table td, table tr { border-collapse: collapse; }
+table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+
+
+
+@@media only screen and (max-width: 640px){
+  body{
+    width:auto!important;
+  }
+
+  table[class="container"], td[class="container"]{
+    width: 100%!important;
+  }
+  table[class="container-inner"]{
+    width: 100%!important;
+  }
+  table[class="remove-space-width"]{
+    display:none!important;
+  }
+
+  table[class="layout-1-col"]{
+    margin-right: 20px!important;
+    width: 30%!important;
+  }
+
+  table[class="layout-1-col-last"]{
+    width: 30%!important;
+  }
+  table[class="remove"]{
+    display:none!important;
+  }
+
+  td[class="image-180"] img{
+    width:100% !important;
+    height:auto !important;
+    max-width:100% !important;
+  }
+
+  td[class="image-80"] img{
+    width:100% !important;
+    height:auto !important;
+    max-width:100% !important;
+  }
+
+  td[class="image-130"] img{
+    width:100% !important;
+    height:auto !important;
+    max-width:100% !important;
+  }
+
+  table[class="gallery-col"]{
+    margin-right: 20px!important;
+    width: 21%!important;
+  }
+
+  table[class="gallery-col-last"]{
+    width: 21%!important;
+  }
+
+  table[class="col-3-container"]{
+    width: 250px!important;
+  }
+  table[class="col-3"]{
+    width: 180px!important;
+  }
+
+  table[class="container-price"]{
+
+    float: none!important;
+    margin: 0 auto;
+  }
+
+
+}
+
+@@media only screen and (max-width: 570px){
+  table[class="col-3-container"]{
+    width: 190px!important;
+  }
+  table[class="col-3"]{
+    width: 120px!important;
+  }
+}
+
+@@media only screen and (max-width: 490px){
+  table[class="gallery-col"]{
+    margin-right: 10px!important;
+    width: 45%!important;
+  }
+
+  table[class="gallery-col-last"]{
+    width: 45%!important;
+  }
+
+
+ table[class="container-social"]{
+    width: 100%!important;
+  }
+
+  table[class="remove"]{
+    display:none!important;
+  }
+
+  table[class="remove-ly-3"] img{
+    width: 5px !important;
+  }
+
+  table[class="container-layout-3"], td[class="container-layout-3"]{
+    width: 100%!important;
+  }
+
+
+
+  td[class="add-20"]{
+    height: 20px!important
+  }
+  td[class="add-18"]{
+    height: 18px!important
+  }
+
+  table[class="layout-1-col"]{
+    margin-right: 0px!important;
+    width: 100%!important;
+  }
+
+  table[class="layout-1-col-last"]{
+    width: 100%!important;
+  }
+
+  td[class="image-180"] {
+    text-align: center !important;
+  }
+
+  td[class="image-180"] img{
+    width:100% !important;
+    height:auto !important;
+    max-width:180px !important;
+    min-width:124px !important;
+  }
+
+  td[class="image-80"] {
+    text-align: center !important;
+  }
+
+  td[class="image-130"] img{
+    width:100% !important;
+    height:auto !important;
+    max-width:130px !important;
+    min-width:100px !important;
+  }
+
+  td[class="align-center"] {
+    text-align: center !important;
+  }
+
+  td[class="td-indent"] {
+    padding: 0 20px !important;
+  }
+
+  table[class="col-3-container"]{
+    width: 100%!important;
+  }
+  table[class="col-3"]{
+    width: 80%!important;
+  }
+
+
+
+}
+
+
+
+    </style>
+
+</head>
+
+<body style="height:100%; background-color:#dde0e2; width:100%; ">
+    <div style="background-color:#eeeeee;margin: 0; -webkit-font-smoothing: antialiased;-ms-text-size-adjust:none; width:100%; padding:10px 0; ">
+        <table border="0" cellspacing="0" cellpadding="0" style="width:600px; background-color: #ffffff;" align="center" class="container">
+            <tr>
+                <td align="center" valign="top" style="padding:10px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-image: url(images/header-bg.gif); background-repeat: repeat-x; background-position: 0 0; background-color: #20232c;">
+
+                        <!-- start space -->
+                        <tr>
+                            <td valign="top" height="46" class="add-20"></td>
+                        </tr>
+                        <!-- end space -->
+
+                        <tr>
+                            <td align="center" valign="top" width="580" class="container">
+
+                                <!-- start space width -->
+                                <table class="remove" width="40" border="0" cellpadding="0" cellspacing="0" align="left" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                    <tr>
+                                        <td width="40" height="2" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                            <p style="padding-left: 40px;">&nbsp;</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- end space width -->
+                                <!-- logo -->
+                                <table border="0" cellspacing="0" cellpadding="0" class="container-social" align="left" style="width:178px;">
+                                    <tr>
+                                        <td valign="top" align="center">
+                                            <a href="@MySiteURL" style="text-decoration:none;"><img src="@MySiteURL/assets/img/basic/logo.png" alt="logo" hspace="0" vspace="0" width="178" style="border:none;" /></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- end logo -->
+                                <!-- social icons -->
+                                <table border="0" cellspacing="0" cellpadding="0" class="container-social" align="right" style="width:245px">
+
+                                    <!-- start space -->
+                                    <tr>
+                                        <td valign="top" height="1" class="add-18"></td>
+                                    </tr>
+                                    <!-- end space -->
+
+                                    <tr>
+                                        <td align="center" valign="top">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="245" class="container-490">
+                                                <tr>
+                                                    <td align="left" valign="middle" width="56">
+                                                        <a href="@MySiteURL" target="blank_" style="text-decoration: none;"><img src="@MySiteURL/assets/img/facebook-icon.png" alt="" width="48" style="border:none;" hspace="0" vspace="0" /></a>
+                                                    </td>
+                                                    <td align="left" valign="middle" width="56">
+                                                        <a href="@MySiteURL" target="blank_" style="text-decoration: none;"><img src="@MySiteURL/assets/img/twitter-icon.png" alt="" width="48" style="border:none;" hspace="0" vspace="0" /></a>
+                                                    </td>
+                                                    <td align="left" valign="middle" width="56">
+                                                        <a href="@MySiteURL" target="blank_" style="text-decoration: none;"><img src="@MySiteURL/assets/img/google-icon.png" alt="" width="48" style="border:none;" hspace="0" vspace="0" /></a>
+                                                    </td>
+                                                    <td align="left" valign="middle" width="56">
+                                                        <a href="@MySiteURL" target="blank_" style="text-decoration: none;"><img src="@MySiteURL/assets/img/linkedin-icon.png" alt="" width="48" style="border:none;" hspace="0" vspace="0" /></a>
+                                                    </td>
+                                                    <td>
+                                                        <!-- start space width -->
+                                                        <table class="remove" width="1" border="0" cellpadding="0" cellspacing="0" align="right" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                                            <tr>
+                                                                <td width="0" height="2" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                                                    <p style="padding-left: 0px;">&nbsp;<img src="@MySiteURL/assets/img/spacer.gif" alt="" width="21" style="border:none;" hspace="0" vspace="0" /></p>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <!-- end space width -->
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- end social icons -->
+
+                            </td>
+                        </tr>
+
+                        <!-- start space -->
+                        <tr>
+                            <td valign="top" height="38" class="add-20"></td>
+                        </tr>
+                        <!-- end space -->
+
+                    </table>
+
+                    <!-- Slider -->
+                    <table border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; width:100%" class="container">
+                        <tr>
+                            <td valign="top" align="center">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="center" valign="top">
+                                            <img src="@Model.Image" alt="" hspace="0" vspace="0" style="border:none;" width="100%" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- Slider end -->
+                    <!-- start layout-1 block -->
+                    <!-- start hor-line -->
+                    <table width="580" border="0" cellspacing="0" cellpadding="0" align="center" class="container" style="height:1px;background-color:#dbdbdb;">
+                        <tr>
+                            <td style="background-color:#dbdbdb; height:1px; padding: 0; margin: 0; vertical-align: top; line-height: 1px; font-size: 1px;" width="580"></td>
+                        </tr>
+                    </table>
+                    <!-- start hor-line -->
+
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+
+                        <!--start space height -->
+                        <tr>
+                            <td height="40"></td>
+                        </tr>
+                        <!--end space height -->
+
+                        <tr>
+                            <td valign="top">
+                                <!-- start layout title -->
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="580" align="center" style="padding: 0; margin: 0;" valign="top" class="container">
+                                            <h2 style="text-align:center; font-size:30px; line-height:30px; color:#303541; font-weight:normal; padding:0; margin: 0; font-family: Arial,Tahoma, Helvetica, sans-serif; ">@Model.EventName</h2>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- end layout title -->
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <!-- start LAYOUT-1 container -->
+                    <table width="580" align="center" border="0" cellspacing="0" cellpadding="0" class="container" bgcolor="#ffffff" style="background-color:#ffffff;">
+
+                        <!-- start  content -->
+                        <tr>
+                            <td valign="top">
+                                <!-- start content right -->
+                                <table width="180" border="0" cellspacing="0" cellpadding="0" align="left" class="layout-1-col-last">
+
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="30"></td>
+                                    </tr>
+                                    <!--end space height -->
+
+                                    <tr>
+                                        <td width="100%" valign="top" align="center" class="image-80">
+                                            <a href="@EventURL" style="text-decoration: none; display: inline-block;">
+                                                <img src="@MySiteURL/assets/img/icon-offer-3.png" width="80" alt="icon3" style="max-width:80px; display:block !important; " border="0" hspace="0" vspace="0" />
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="20"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                    <!-- layout-1 title-1 -->
+                                    <tr>
+                                        <td valign="top" align="center">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                                                <tr>
+                                                    <td valign="top" align="center">
+                                                        <h4 style="font-size:18px;font-weight:normal; color:#303541;font-family: Arial,Tahoma, Helvetica, sans-serif; margin: 0;padding: 0;line-height: 22px;text-align: center;">Venue</h4>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- end layout-1 title-1 -->
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="12"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                    <!-- layout-1 text -->
+                                    <tr>
+                                        <td valign="top">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 13px; line-height: 18px; margin: 0; padding: 0; color:#303541; font-family: Arial,Tahoma, Helvetica, sans-serif;" align="center">
+                                                        @Model.location
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- end layout-1 text -->
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="22"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                </table>
+                                <!-- end content right -->
+                                
+                                <!-- start space width  -->
+                                <table class="remove" width="1" border="0" cellpadding="0" cellspacing="0" align="left" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                    <tr>
+                                        <td width="0" height="3" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                            <p style="padding-left:5px;mso-table-lspace:0;mso-table-rspace:0;"><img src="@MySiteURL/assets/img/spacer.gif" alt="" style="border:none; display:block !important;" width="15" /></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- end space width  -->
+                                <!-- start content center -->
+                                <table width="180" border="0" cellspacing="0" cellpadding="0" align="left" class="layout-1-col">
+
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="30"></td>
+                                    </tr>
+                                    <!--end space height -->
+
+                                    <tr>
+                                        <td width="100%" valign="top" align="center" class="image-80">
+                                            <a href="@EventURL" style="text-decoration: none; display: inline-block;">
+                                                <img src="@MySiteURL/assets/img/icon-offer-2.png" width="80" alt="icon2" style="max-width:80px; display:block !important; " border="0" hspace="0" vspace="0" />
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="20"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                    <!-- layout-1 title-1 -->
+                                    <tr>
+                                        <td valign="top" align="center">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                                                <tr>
+                                                    <td valign="top" align="center">
+                                                        <h4 style="font-size:18px;font-weight:normal; color:#303541;font-family: Arial,Tahoma, Helvetica, sans-serif; margin: 0;padding: 0;line-height: 22px;text-align: center;">Start Time</h4>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- end layout-1 title-1 -->
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="12"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                    <!-- layout-1 text -->
+                                    <tr>
+                                        <td valign="top">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 13px; line-height: 18px; margin: 0; padding: 0; color:#303541; font-family: Arial,Tahoma, Helvetica, sans-serif;" align="center">
+                                                        @Model.StartDate.Value.ToString()
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- end layout-1 text -->
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="22"></td>
+                                    </tr>
+                                    <!--end space height -->
+
+                                </table>
+                                <!-- end content center -->
+                                <!-- start space width  -->
+                                <table class="remove" width="1" border="0" cellpadding="0" cellspacing="0" align="left" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                    <tr>
+                                        <td width="0" height="3" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                            <p style="padding-left:5px;mso-table-lspace:0;mso-table-rspace:0; "><img src="@MySiteURL/assets/img/spacer.gif" alt="" style="border:none; display:block !important;" width="15" /></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- end space width  -->
+                                
+                                <!-- start content left -->
+                                <table width="180" border="0" cellspacing="0" cellpadding="0" align="left" class="layout-1-col">
+
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="30"></td>
+                                    </tr>
+                                    <!--end space height -->
+
+                                    <tr>
+                                        <td width="100%" valign="top" align="center" class="image-80">
+                                            <a href="@EventURL" style="text-decoration: none; display: inline-block;">
+                                                <img src="@MySiteURL/assets/img/icon-offer-1.png" width="80" alt="icon1" style="max-width:80px; display:block !important; " border="0" hspace="0" vspace="0" />
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="20"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                    <!-- layout-1 title-1 -->
+                                    <tr>
+                                        <td valign="top" align="center">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                                                <tr>
+                                                    <td valign="top" align="center">
+                                                        <h4 style="font-size:18px;font-weight:normal; color:#303541;font-family: Arial,Tahoma, Helvetica, sans-serif; margin: 0;padding: 0;line-height: 22px; text-align: center;">Duration</h4>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- end layout-1 title-1 -->
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="12"></td>
+                                    </tr>
+                                    <!--end space height -->
+                                    <!-- layout-1 text -->
+                                    <tr>
+                                        <td valign="top">
+                                            <table border="0" cellspacing="0" cellpadding="0" align="center">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 13px; line-height: 18px; margin: 0; padding: 0; color:#303541; font-family: Arial,Tahoma, Helvetica, sans-serif;" align="center">
+                                                        @((Model.EndDate - Model.StartDate).Value.ToString())
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- end layout-1 text -->
+                                    <!--start space height -->
+                                    <tr>
+                                        <td height="22"></td>
+                                    </tr>
+                                    <!--end space height -->
+
+                                </table>
+                                <!-- end content left -->
+                            </td>
+                        </tr>
+                        <!-- end content -->
+                        <!--start space height -->
+                        <tr>
+                            <td height="50"></td>
+                        </tr>
+                        <!--end space height -->
+                    </table>
+                    <!-- end layout-1 container  -->
+
+
+                </td>
+            </tr>
+        </table>
+
+
+        <!-- start layout-3 container -->
+        <table border="0" cellspacing="0" cellpadding="0" style="width:600px; background-color: #94cf3f;" align="center" class="container">
+            <!--start space height -->
+            <tr>
+                <td height="26"></td>
+            </tr>
+            <!--end space height -->
+            <tr>
+                <td valign="top">
+
+                    <!-- start space width  -->
+                    <table class="remove-ly-3" width="1" border="0" cellpadding="0" cellspacing="0" align="left" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                        <tr>
+                            <td width="0" height="3" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                <p style="padding-left:10px;mso-table-lspace:0;mso-table-rspace:0; "><img src="@MySiteURL/assets/img/spacer.gif" alt="" style="border:none; display:block !important;" width="30" /></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- end space width  -->
+
+                    <table width="326" border="0" cellspacing="0" cellpadding="0" align="left">
+                        <tr>
+                            <td valign="top" style="color:#fff;font-size:18px;font-weight:bold;line-height:20px;font-family: Arial,Tahoma, Helvetica, sans-serif; padding: 0;margin: 0;" class="align-center">
+                                <i>@Model.Dealtext  </i>
+                            </td>
+                        </tr>
+                        <!--start space height -->
+                        <tr>
+                            <td height="16"></td>
+                        </tr>
+                        <!--end space height -->
+                    </table>
+
+                    <table width="176" border="0" cellspacing="0" cellpadding="0" align="right" class="container-layout-3">
+                        <tr>
+                            <td valign="top" align="center">
+                                <table width="156" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td style="height:43px;  text-align:center; background-clip: padding-box; border-radius:6px;background:#3a3f50;">
+                                            <a href="@Model.TicketUrl" target="blank_" style="text-decoration:none;color:#ffffff;display:block;font-size:18px;line-height:18px; padding:12px 0px; font-family: Arial,Tahoma, Helvetica, sans-serif;  margin: 0; vertical-align: center;">Buy Ticket</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!--start space height -->
+                        <tr>
+                            <td height="16"></td>
+                        </tr>
+                        <!--end space height -->
+                    </table>
+                    <!-- start space width  -->
+                    <table class="remove-1" width="1" border="0" cellpadding="0" cellspacing="0" align="right" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                        <tr>
+                            <td width="0" height="3" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                <p style="padding-left:2px;mso-table-lspace:0;mso-table-rspace:0; "><img src="@MySiteURL/assets/img/spacer.gif" alt="" style="border:none; display:block !important;" width="8" /></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- end space width  -->
+
+                </td>
+            </tr>
+        </table>
+        <!-- end layout-3 container -->
+        <!-- start layout-6 container -->
+        <table border="0" cellspacing="0" cellpadding="0" style="width:600px; background-color: #ffffff;" align="center" class="container">
+            <!--start space height -->
+            <tr>
+                <td height="28"></td>
+            </tr>
+            <!--end space height -->
+            <tr>
+                <td valign="top" style="padding: 0 10px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td align="center" valign="top" style="padding: 0 40px; margin: 0; font-size: 13px;line-height: 18px; color:#3a3f50;font-family: Arial,Tahoma, Helvetica, sans-serif;">
+                                You're receiving this email because you signed up for Email or attended one of our events. You can <a href="@MySiteURL" style="padding: 0; margin: 0; font-size: 13px;line-height: 18px; color:#94cf3f;font-family: Arial,Tahoma, Helvetica, sans-serif; text-decoration: underline;">unsubscribe</a> from this email or change your email notifications. Online version is <a href="http://demolink.org/" style="padding: 0; margin: 0; font-size: 13px;line-height: 18px; color:#94cf3f;font-family: Arial,Tahoma, Helvetica, sans-serif; text-decoration: underline;">here</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!--start space height -->
+            <tr>
+                <td height="28"></td>
+            </tr>
+            <!--end space height -->
+        </table>
+        <!-- end layout-6 container -->
+        <!-- start layout-7 container -->
+        <table border="0" cellspacing="0" cellpadding="0" style="width:600px; background-color: #33383f;" align="center" class="container">
+            <!--start space height -->
+            <tr>
+                <td height="28"></td>
+            </tr>
+            <!--end space height -->
+            <tr>
+                <td valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td align="center" valign="top" style="text-transform:uppercase; text-align:center; color:#dde0e2; font-size:14px; padding: 0;font-family: Arial,Tahoma, Helvetica, sans-serif; margin: 0;">
+                                MusicPad &copy; 2017 <a href="@MySiteURL" style="text-decoration:none;color:#dde0e2;font-size:14px; padding: 0;font-family:Arial, Helvetica, sans-serif; margin: 0;" target="blank_">Privacy policy</a>
+                            </td>
+                        </tr>
+                        <!--start space height -->
+                        <tr>
+                            <td height="28"></td>
+                        </tr>
+                        <!--end space height -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!-- end layout-7 container -->
+
+
+
+    </div>
+</body>
+</html>
+

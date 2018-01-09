@@ -33,6 +33,7 @@ namespace MusicEventApp.ViewModels
         public string CategoryName { get; set; }
         public string MainCategoryName { get; set; }
         public int MainCatID { get; set; }
+        public Nullable<int> IsNew { get; set; }
         //public string Discription { get; set; }
     }
 }
