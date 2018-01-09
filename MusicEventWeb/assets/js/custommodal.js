@@ -37,7 +37,7 @@ $(function () {
                 } else {
                     $('.pageLoader').addClass("active");
                     $.ajax({
-                        url: '../Subscribe/SubscribeEmail',
+                        url: '/Subscribe/SubscribeEmail',
                         type: 'GET',
                         cache: false,
                         dataType: "json",

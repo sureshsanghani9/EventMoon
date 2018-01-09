@@ -373,7 +373,7 @@ jQuery(function($) {
 				} else {
 					$.ajax({
 						type: "POST",
-						url: "~/assets/php/submit.php",
+						url: "/assets/php/submit.php",
 						data: dataString,
 						success: function () {
 							$('#contactForm').slideUp();

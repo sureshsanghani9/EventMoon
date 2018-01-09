@@ -1,0 +1,86 @@
+﻿@using System.Configuration;
+@{
+    string AndriodAppURL = ConfigurationManager.AppSettings["AndriodAppURL"] != null ? ConfigurationManager.AppSettings["AndriodAppURL"].ToString() : "";
+    string iOSAppURl = ConfigurationManager.AppSettings["iOSAppURl"] != null ? ConfigurationManager.AppSettings["iOSAppURl"].ToString() : "";
+}
+
+<!-- BEGIN # MODAL LOGIN -->
+<div class="modal fade" id="appDownloadAndriod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img class="" src="~/assets/img/logo/PlaystoreLogo.png">
+                <img class="img-circle" id="img_logo2" src="~/assets/img/logo/AndroidLogo.png">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div>
+                <!-- Begin | Lost Password Form -->
+                <form style="">
+                    <div class="modal-body">
+                        <div  style="text-align: center">
+                            <div class="glyphicon glyphicon-chevron-right"></div>
+                            <span>You can download our Andriod App from Play Store!</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <a href="@AndriodAppURL" class="btn btn-lg btn-block btn-default">Download</a>
+                        </div>
+                        <div style="">
+                            <button type="button" class="btn btn-link close" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- End | Lost Password Form -->
+            </div>
+            <!-- End # DIV Form -->
+
+        </div>
+    </div>
+</div>
+<!-- END # MODAL LOGIN -->
+
+<!-- BEGIN # MODAL LOGIN -->
+<div class="modal fade" id="appDownloadIOS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img class="" src="~/assets/img/logo/AppleLogo.png">
+                <img class="" src="~/assets/img/logo/IphoneLogo.png">
+                <img class="" src="~/assets/img/logo/iOSLogo.png">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div>
+                <!-- Begin | Lost Password Form -->
+                <form style="">
+                    <div class="modal-body">
+                        <div style="text-align: center">
+                            <div class="glyphicon glyphicon-chevron-right"></div>
+                            <span>You can download our iOS App from Apple Store!</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <a href="@iOSAppURl" class="btn btn-lg btn-block btn-default">Download</a>
+                        </div>
+                        <div style="">
+                            <button type="button" class="btn btn-link close" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- End | Lost Password Form -->
+            </div>
+            <!-- End # DIV Form -->
+
+        </div>
+    </div>
+</div>
+<!-- END # MODAL LOGIN -->

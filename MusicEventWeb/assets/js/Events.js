@@ -2,6 +2,11 @@
 
 $(document).ready(function () {
 
+    if ($(document).find("title").text() == "Home")
+    {
+        OpenMobileAppDownloadPopup();
+    }
+
     if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Details")
     {
         // Set the date we're counting down to
@@ -15,7 +20,7 @@ $(document).ready(function () {
         var startdate = $("#starttime").val();
         $('.pageLoader').addClass("active");
         $.ajax({
-            url: '../Home/LatestEventList',
+            url: '/Home/LatestEventList',
             type: 'POST',
             cache: false,
             data: { MainCategoryId: MainCategoryId, Keyword: Keyword, startdate: startdate }
@@ -106,7 +111,7 @@ function RefreshEventPage() {
     $("#lblSearchFor").html($("#MainCatID option:selected").text());
     $('.pageLoader').addClass("active");
     $.ajax({
-        url: '../Event/EventList',
+        url: '/Event/EventList',
         type: 'POST',
         cache: false,
         data: { MainCategoryId: MainCategoryId, Keyword: Keyword, PageNumber: PageNumber, PageSize: PageSize, Sort: Sort }
@@ -132,5 +137,18 @@ function RefreshEventPage() {
         }));
         $('.pageLoader').removeClass("active");
     });
+}
+
+function OpenMobileAppDownloadPopup()
+{
+    var uagent = navigator.userAgent.toLowerCase();
+    if (uagent.search("iphone") > -1)
+    {
+        $("#appDownloadIOS").modal('show');
+    }
+    else if (uagent.search("android") > -1)
+    {
+        $("#appDownloadAndriod").modal('show');
+    }
 }
 
