@@ -40,8 +40,8 @@ namespace MusicEventDataAccess
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Users_Groups> Users_Groups { get; set; }
-        public virtual DbSet<NewEvent> NewEvents { get; set; }
         public virtual DbSet<EmailSubscriber> EmailSubscribers { get; set; }
+        public virtual DbSet<NewEvent> NewEvents { get; set; }
     
         [DbFunction("MusicEventEntities", "fnNTextToIntTable")]
         public virtual IQueryable<fnNTextToIntTable_Result> fnNTextToIntTable(string data)

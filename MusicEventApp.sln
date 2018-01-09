@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEventLib", "MusicEvent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEventDataAccess", "MusicEventDataAccess\MusicEventDataAccess.csproj", "{61CD2CE9-3EF5-4D61-8AA1-2998FFA758CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicEventScheduler", "MusicEventScheduler\MusicEventScheduler.csproj", "{BB9585F0-E975-4A6E-85A7-45C47AD5E0DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{61CD2CE9-3EF5-4D61-8AA1-2998FFA758CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61CD2CE9-3EF5-4D61-8AA1-2998FFA758CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61CD2CE9-3EF5-4D61-8AA1-2998FFA758CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9585F0-E975-4A6E-85A7-45C47AD5E0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9585F0-E975-4A6E-85A7-45C47AD5E0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9585F0-E975-4A6E-85A7-45C47AD5E0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9585F0-E975-4A6E-85A7-45C47AD5E0DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

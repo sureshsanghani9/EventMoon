@@ -105,14 +105,9 @@
           <Property Name="MainCategoryName" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NewEvent">
           <Key>
             <PropertyRef Name="EventID" />
-            <PropertyRef Name="CategoryID" />
-            <PropertyRef Name="ISActive" />
-            <PropertyRef Name="IsTmaster" />
           </Key>
           <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
@@ -712,39 +707,12 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <EntitySet Name="GroupChat" EntityType="Self.GroupChat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainCategory" EntityType="Self.MainCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewEvent" EntityType="Self.NewEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubEvent" EntityType="Self.SubEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users_Groups" EntityType="Self.Users_Groups" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NewEvent" EntityType="Self.NewEvent" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [NewEvent].[EventID] AS [EventID], 
-    [NewEvent].[UserID] AS [UserID], 
-    [NewEvent].[CategoryID] AS [CategoryID], 
-    [NewEvent].[EventName] AS [EventName], 
-    [NewEvent].[StartDate] AS [StartDate], 
-    [NewEvent].[EndDate] AS [EndDate], 
-    [NewEvent].[Starttime] AS [Starttime], 
-    [NewEvent].[Endtime] AS [Endtime], 
-    [NewEvent].[Dealtext] AS [Dealtext], 
-    [NewEvent].[Percentage] AS [Percentage], 
-    [NewEvent].[latitude] AS [latitude], 
-    [NewEvent].[longitude] AS [longitude], 
-    [NewEvent].[location] AS [location], 
-    [NewEvent].[Image] AS [Image], 
-    [NewEvent].[ISActive] AS [ISActive], 
-    [NewEvent].[CreatedBy] AS [CreatedBy], 
-    [NewEvent].[UpdatedBy] AS [UpdatedBy], 
-    [NewEvent].[CreatedDatetime] AS [CreatedDatetime], 
-    [NewEvent].[UpdatedDatetime] AS [UpdatedDatetime], 
-    [NewEvent].[TicketUrl] AS [TicketUrl], 
-    [NewEvent].[IsTmaster] AS [IsTmaster], 
-    [NewEvent].[MasterEventID] AS [MasterEventID], 
-    [NewEvent].[ViewCount] AS [ViewCount], 
-    [NewEvent].[IsNew] AS [IsNew]
-    FROM [dbo].[NewEvent] AS [NewEvent]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -950,38 +918,6 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="JoinDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="NewEvent">
-          <Key>
-            <PropertyRef Name="EventID" />
-            <PropertyRef Name="CategoryID" />
-            <PropertyRef Name="ISActive" />
-            <PropertyRef Name="IsTmaster" />
-          </Key>
-          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="EventName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Starttime" Type="Time" Precision="7" />
-          <Property Name="Endtime" Type="Time" Precision="7" />
-          <Property Name="Dealtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Percentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ISActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="UpdatedBy" Type="Int32" />
-          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
-          <Property Name="TicketUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsTmaster" Type="Boolean" Nullable="false" />
-          <Property Name="MasterEventID" Type="Int32" />
-          <Property Name="ViewCount" Type="Int64" />
-          <Property Name="IsNew" Type="Int32" />
-        </EntityType>
         <EntityContainer Name="MusicEventEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -996,7 +932,6 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
           <EntitySet Name="Users_Groups" EntityType="Self.Users_Groups" />
-          <EntitySet Name="NewEvents" EntityType="Self.NewEvent" />
           <FunctionImport Name="fnNTextToIntTable" IsComposable="true" ReturnType="Collection(MusicEventModel.fnNTextToIntTable_Result)">
           <Parameter Name="Data" Mode="In" Type="String" />
           </FunctionImport>
@@ -1433,6 +1368,7 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           </FunctionImport>
           <EntitySet Name="EmailSubscribers" EntityType="MusicEventModel.EmailSubscriber" />
           <FunctionImport Name="GetAllNewEvents" ReturnType="Collection(MusicEventModel.GetAllNewEvents_Result)" />
+          <EntitySet Name="NewEvents" EntityType="MusicEventModel.NewEvent" />
         </EntityContainer>
         <ComplexType Name="Admin_AdvertiseList_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1951,6 +1887,35 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
           <Property Type="Int32" Name="MainCatID" Nullable="true" />
           <Property Type="Int32" Name="IsNew" Nullable="true" />
         </ComplexType>
+        <EntityType Name="NewEvent">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="EventName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Starttime" Type="Time" Precision="7" />
+          <Property Name="Endtime" Type="Time" Precision="7" />
+          <Property Name="Dealtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Percentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ISActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="TicketUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsTmaster" Type="Boolean" Nullable="false" />
+          <Property Name="MasterEventID" Type="Int32" />
+          <Property Name="ViewCount" Type="Int64" />
+          <Property Name="IsNew" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2159,36 +2124,6 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
                 <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NewEvents">
-            <EntityTypeMapping TypeName="MusicEventModel.NewEvent">
-              <MappingFragment StoreEntitySet="NewEvent">
-                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
-                <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
-                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
-                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
-                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
-                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
-                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
-                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
-                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2870,6 +2805,36 @@ warning 6002: The table/view 'MusicEvent.dbo.NewEvent' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="NewEvents">
+            <EntityTypeMapping TypeName="MusicEventModel.NewEvent">
+              <MappingFragment StoreEntitySet="NewEvent">
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
