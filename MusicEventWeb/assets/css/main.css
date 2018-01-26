@@ -76,7 +76,7 @@ hr {
     width: 0;
     height: 0;
     /*background: url(../img/basic/ajax-loader.gif) center center no-repeat #222222;*/
-    background: url(../img/basic/ajax-loader2.jpg) center center no-repeat #222222;
+    background: url(../img/basic/ajax-loader3.png) center center no-repeat #222222;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
     -moz-opacity: 0;
@@ -3574,7 +3574,6 @@ store product
     overflow: hidden;
     text-overflow: ellipsis;
     height: 20px;
-    
 }
 
 .store-product figure {
@@ -3854,6 +3853,10 @@ ul.pagination {
         width: 25%;
     }
 
+    .evtBlock {
+        width: calc(50% - 20px) !important;
+    }
+
     .doc-header .container {
         position: relative;
     }
@@ -4087,6 +4090,10 @@ ul.pagination {
 @media (max-width: 767px) {
     .store-product {
         width: 33.333333334%;
+    }
+
+    .evtBlock {
+        width: calc(50% - 20px) !important;
     }
 
     .search-widget {
@@ -4419,6 +4426,10 @@ ul.pagination {
         width: 50%;
     }
 
+    .evtBlock {
+        width: calc(100% - 20px) !important;
+    }
+
     .song-list li {
         width: 33.33334%;
     }
@@ -4473,6 +4484,10 @@ ul.pagination {
 @media (max-width:360px) {
     .store-product {
         width: 100%;
+    }
+
+    .evtBlock {
+        width: calc(100% - 20px) !important;
     }
 
     .song-list li {
@@ -4570,6 +4585,7 @@ Dark Skin
 .theDarkSkin .btn-transparent {
     border-color: #fff !important;
 }
+
 .evtBlock {
     background-color: whitesmoke;
     padding: 15px 0px;

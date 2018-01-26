@@ -185,6 +185,7 @@
     <Content Include="assets\fonts\playercontrols.svg" />
     <Content Include="assets\img\basic\ajax-loader.gif" />
     <Content Include="assets\img\basic\ajax-loader2.jpg" />
+    <Content Include="assets\img\basic\ajax-loader3.png" />
     <Content Include="assets\img\basic\bx_loader.gif" />
     <Content Include="assets\img\basic\controls.png" />
     <Content Include="assets\img\basic\ele1.png" />
@@ -220,6 +221,7 @@
     <Content Include="assets\img\logo\ItuneLogo.png" />
     <Content Include="assets\img\logo\logo2.png" />
     <Content Include="assets\img\logo\logo3.jpg" />
+    <Content Include="assets\img\logo\logo4.png" />
     <Content Include="assets\img\logo\MusicpadLogo.PNG" />
     <Content Include="assets\img\logo\PlaystoreLogo.png" />
     <Content Include="assets\img\phone-img.png" />
