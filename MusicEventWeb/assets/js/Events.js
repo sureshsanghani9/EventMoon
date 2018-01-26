@@ -5,6 +5,7 @@ $(document).ready(function () {
     if ($(document).find("title").text() == "Home")
     {
         OpenMobileAppDownloadPopup();
+        getUserGeoLocation();
     }
 
     if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Details")
@@ -12,6 +13,10 @@ $(document).ready(function () {
         // Set the date we're counting down to
         countDownDate = new Date($("#Startdate").val()).getTime();
         StartTimer(countDownDate);
+    }
+
+    if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Events") {
+        
     }
 
     $("#btnFindEvent").on("click", function () {
@@ -135,6 +140,7 @@ function RefreshEventPage() {
                 RefreshEventPage();
             }
         }));
+        getUserGeoLocation();
         $('.pageLoader').removeClass("active");
     });
 }
@@ -144,11 +150,61 @@ function OpenMobileAppDownloadPopup()
     var uagent = navigator.userAgent.toLowerCase();
     if (uagent.search("iphone") > -1)
     {
-        $("#appDownloadIOS").modal('show');
+        $("#appDownloadIOS2").modal('show');
     }
     else if (uagent.search("android") > -1)
     {
-        $("#appDownloadAndriod").modal('show');
+        $("#appDownloadAndriod2").modal('show');
     }
 }
 
+function getUserGeoLocation() {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            $("#hdnUserLatitude").val(pos.lat);
+            $("#hdnUserLongitude").val(pos.lng);
+
+            resolveDistanceForEvent();
+            
+        }, function () {
+            //error
+        });
+    }
+}
+
+function resolveDistanceForEvent() {
+    var ulat = $("#hdnUserLatitude").val();
+    var ulong = $("#hdnUserLongitude").val();
+    $.each($(".evtBlock"), function (i, val) {
+        var evt = $(this);
+        var elat = $(evt).find("#hdnLatitude").val();
+        var elong = $(evt).find("#hdnLongitude").val();
+        $(evt).find("#spanDistance").html(parseFloat(calcCrow(ulat, ulong, elat, elong)).toFixed("0.00"));
+    });
+}
+
+//This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
+function calcCrow(lat1, lon1, lat2, lon2) {
+    var R = 6371; // km
+    var dLat = toRad(lat2 - lat1);
+    var dLon = toRad(lon2 - lon1);
+    var lat1 = toRad(lat1);
+    var lat2 = toRad(lat2);
+
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d;
+}
+
+// Converts numeric degrees to radians
+function toRad(Value) {
+    return Value * Math.PI / 180;
+}

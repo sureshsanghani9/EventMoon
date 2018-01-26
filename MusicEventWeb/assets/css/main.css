@@ -75,7 +75,8 @@ hr {
     left: 50%;
     width: 0;
     height: 0;
-    background: url(../img/basic/ajax-loader.gif) center center no-repeat #222222;
+    /*background: url(../img/basic/ajax-loader.gif) center center no-repeat #222222;*/
+    background: url(../img/basic/ajax-loader2.jpg) center center no-repeat #222222;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
     -moz-opacity: 0;
@@ -3573,7 +3574,7 @@ store product
     overflow: hidden;
     text-overflow: ellipsis;
     height: 20px;
-    white-space: nowrap;
+    
 }
 
 .store-product figure {
@@ -4568,4 +4569,55 @@ Dark Skin
 
 .theDarkSkin .btn-transparent {
     border-color: #fff !important;
+}
+.evtBlock {
+    background-color: whitesmoke;
+    padding: 15px 0px;
+    border: 1px #ececec solid;
+    width: calc(33.33% - 20px);
+    margin: 10px;
+}
+
+.product-info .catInfo {
+    color: red;
+    font-size: 16px;
+    text-transform: none;
+}
+
+.product-info .evtTime {
+    color: red;
+    font-size: 16px;
+    text-transform: none;
+}
+
+.product-info .evtName {
+    height: 50px;
+    color: #0000ff9C;
+    text-transform: none;
+    font-size: 16px;
+}
+
+.product-info .evtAddress {
+    height: 50px;
+    color: #2928289c;
+    text-transform: none;
+    font-size: 16px;
+}
+
+.product-info .evtNearbt {
+    text-transform: none;
+    color: #6aa01c;
+}
+
+.product-info .evtDistance {
+    text-transform: none;
+    color: #f15454;
+}
+
+.store-product h3 {
+    padding: 0px 5px;
+}
+
+.product-info .price-tag {
+    padding: 0px 5px;
 }

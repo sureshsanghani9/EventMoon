@@ -59,6 +59,9 @@
 
         @{ Html.RenderPartial("_LoginModalPartial"); }
 
+        <input type="hidden" id="hdnUserLatitude" name="hdnUserLatitude" value="0" />
+        <input type="hidden" id="hdnUserLongitude" name="hdnUserLongitude" value="0" />
+
     </div>
     @{ Html.RenderPartial("_FooterPartial"); }
 
@@ -72,8 +75,8 @@
     <script src="~/assets/js/jquery.datetimepicker.full.min.js"></script>
     <script src="~/assets/js/jquery.bxslider.min.js"></script>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAMAzSOtMv0Bs3kR1clX5R25cPDFkuKTAw&v=3.exp&#038;sensor=false&#038;ver=3.0'></script>
-    <script src="~/assets/js/jplayer/jquery.jplayer.min.js"></script>
-    <script src="~/assets/js/jplayer/jplayer.playlist.min.js"></script>
+    @*<script src="~/assets/js/jplayer/jquery.jplayer.min.js"></script>
+    <script src="~/assets/js/jplayer/jplayer.playlist.min.js"></script>*@
     <script src="~/assets/js/jquery.flexslider-min.js"></script>
     <script src="~/assets/js/jquery.stellar.min.js"></script>
     <script src="~/assets/js/jquery.sticky.js"></script>
