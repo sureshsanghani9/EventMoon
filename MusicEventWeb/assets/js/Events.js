@@ -159,10 +159,11 @@ function OpenMobileAppDownloadPopup()
 }
 
 function getUserGeoLocation() {
+    var pos;
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
+            pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -173,7 +174,18 @@ function getUserGeoLocation() {
             resolveDistanceForEvent();
             
         }, function () {
-            //error
+            $.getJSON('https://ipinfo.io/geo', function (response) {
+                var loc = response.loc.split(',');
+                pos = {
+                    lat: loc[0],
+                    lng: loc[1]
+                };
+
+                $("#hdnUserLatitude").val(pos.lat);
+                $("#hdnUserLongitude").val(pos.lng);
+
+                resolveDistanceForEvent();
+            });
         });
     }
 }

@@ -35,7 +35,10 @@ namespace MusicEventApp.Controllers
         [HttpPost]
         public ActionResult EventList(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort)
         {
-            EventPageDataModal EventPage = _EventService.GetEventListBySearch(MainCategoryId, Keyword, PageNumber, PageSize, Sort);
+            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
+
+            EventPageDataModal EventPage = _EventService.GetEventListBySearch(MainCategoryId, Keyword, PageNumber, PageSize, Sort, Latitude, Longitude);
             List<EventViewModal> Events = Mapper.Map<List<EventDataModal>, List<EventViewModal>>(EventPage.Events);
             ViewBag.TotalRecords = EventPage.TotalRecords.FirstOrDefault().TotalRecords;
 
@@ -44,7 +47,10 @@ namespace MusicEventApp.Controllers
 
         public ActionResult Details(int id)
         {
-            EventDataModal evtdata = _EventService.GetEventDetailsById(id);
+            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
+
+            EventDataModal evtdata = _EventService.GetEventDetailsById(id, Latitude, Longitude);
             EventViewModal evt = Mapper.Map<EventDataModal, EventViewModal>(evtdata);
 
             List<MetaDataViewModel> MetaData = new List<MetaDataViewModel> {

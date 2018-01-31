@@ -481,6 +481,8 @@
         </Function>
         <Function Name="GetEventDetailsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetEventListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MainCategoryId" Type="int" Mode="In" />
@@ -488,6 +490,8 @@
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
           <Parameter Name="Sort" Type="varchar" Mode="In" />
+          <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetEventListLast1hour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetEventnearME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -509,7 +513,10 @@
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
         </Function>
-        <Function Name="GetHeaderEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetHeaderEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetMaxCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetMyChatList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
@@ -522,6 +529,8 @@
           <Parameter Name="MainCategoryId" Type="int" Mode="In" />
           <Parameter Name="Keyword" Type="nvarchar" Mode="In" />
           <Parameter Name="startdate" Type="datetime" Mode="In" />
+          <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GroupChatDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
@@ -1350,25 +1359,34 @@
             <Parameter Name="OTP" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="EmailSubscribers" EntityType="MusicEventModel.EmailSubscriber" />
+          <EntitySet Name="NewEvents" EntityType="MusicEventModel.NewEvent" />
+          <FunctionImport Name="GetAllNewEvents" ReturnType="Collection(MusicEventModel.GetAllNewEvents_Result)" />
+          <FunctionImport Name="GetEventDetailsById" ReturnType="Collection(MusicEventModel.GetEventDetailsById_Result)">
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetEventListBySearch">
             <Parameter Name="MainCategoryId" Mode="In" Type="Int32" />
             <Parameter Name="Keyword" Mode="In" Type="String" />
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
             <Parameter Name="Sort" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetHeaderEvent" ReturnType="Collection(MusicEventModel.GetHeaderEvent_Result)" />
+          <FunctionImport Name="GetHeaderEvent" ReturnType="Collection(MusicEventModel.GetHeaderEvent_Result)">
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetTenLatestEventList" ReturnType="Collection(MusicEventModel.GetTenLatestEventList_Result)">
             <Parameter Name="MainCategoryId" Mode="In" Type="Int32" />
             <Parameter Name="Keyword" Mode="In" Type="String" />
             <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetEventDetailsById" ReturnType="Collection(MusicEventModel.GetEventDetailsById_Result)">
-          <Parameter Name="EventID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <EntitySet Name="EmailSubscribers" EntityType="MusicEventModel.EmailSubscriber" />
-          <FunctionImport Name="GetAllNewEvents" ReturnType="Collection(MusicEventModel.GetAllNewEvents_Result)" />
-          <EntitySet Name="NewEvents" EntityType="MusicEventModel.NewEvent" />
         </EntityContainer>
         <ComplexType Name="Admin_AdvertiseList_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1771,122 +1789,6 @@
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
         </EntityType>
-        <ComplexType Name="GetHeaderEvent_Result">
-          <Property Type="Int32" Name="EventID" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-          <Property Type="Int32" Name="CategoryID" Nullable="false" />
-          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
-          <Property Type="Time" Name="Starttime" Nullable="true" />
-          <Property Type="Time" Name="Endtime" Nullable="true" />
-          <Property Type="String" Name="Dealtext" Nullable="true" />
-          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="location" Nullable="true" />
-          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="ISActive" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="TicketUrl" Nullable="true" />
-          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
-          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
-          <Property Type="Int64" Name="ViewCount" Nullable="true" />
-          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="MainCatID" Nullable="true" />
-          <Property Type="Int32" Name="IsNew" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetTenLatestEventList_Result">
-          <Property Type="Int32" Name="EventID" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-          <Property Type="Int32" Name="CategoryID" Nullable="false" />
-          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
-          <Property Type="Time" Name="Starttime" Nullable="true" />
-          <Property Type="Time" Name="Endtime" Nullable="true" />
-          <Property Type="String" Name="Dealtext" Nullable="true" />
-          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="location" Nullable="true" />
-          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="ISActive" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="TicketUrl" Nullable="true" />
-          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
-          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
-          <Property Type="Int64" Name="ViewCount" Nullable="true" />
-          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="MainCatID" Nullable="true" />
-          <Property Type="Int32" Name="IsNew" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetEventDetailsById_Result">
-          <Property Type="Int32" Name="EventID" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-          <Property Type="Int32" Name="CategoryID" Nullable="false" />
-          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
-          <Property Type="Time" Name="Starttime" Nullable="true" />
-          <Property Type="Time" Name="Endtime" Nullable="true" />
-          <Property Type="String" Name="Dealtext" Nullable="true" />
-          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="location" Nullable="true" />
-          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="ISActive" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="TicketUrl" Nullable="true" />
-          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
-          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
-          <Property Type="Int64" Name="ViewCount" Nullable="true" />
-          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="MainCatID" Nullable="true" />
-          <Property Type="Int32" Name="IsNew" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetAllNewEvents_Result">
-          <Property Type="Int32" Name="EventID" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-          <Property Type="Int32" Name="CategoryID" Nullable="false" />
-          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
-          <Property Type="Time" Name="Starttime" Nullable="true" />
-          <Property Type="Time" Name="Endtime" Nullable="true" />
-          <Property Type="String" Name="Dealtext" Nullable="true" />
-          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="location" Nullable="true" />
-          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="ISActive" Nullable="false" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="TicketUrl" Nullable="true" />
-          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
-          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
-          <Property Type="Int64" Name="ViewCount" Nullable="true" />
-          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="MainCatID" Nullable="true" />
-          <Property Type="Int32" Name="IsNew" Nullable="true" />
-        </ComplexType>
         <EntityType Name="NewEvent">
           <Key>
             <PropertyRef Name="EventID" />
@@ -1916,6 +1818,126 @@
           <Property Name="ViewCount" Type="Int64" />
           <Property Name="IsNew" Type="Int32" />
         </EntityType>
+        <ComplexType Name="GetAllNewEvents_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
+          <Property Type="Int32" Name="IsNew" Nullable="true" />
+          <Property Type="Int32" Name="DistanceMile" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEventDetailsById_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
+          <Property Type="Int32" Name="IsNew" Nullable="true" />
+          <Property Type="Int32" Name="DistanceMile" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetHeaderEvent_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
+          <Property Type="Int32" Name="IsNew" Nullable="true" />
+          <Property Type="Int32" Name="DistanceMile" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetTenLatestEventList_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Starttime" Nullable="true" />
+          <Property Type="Time" Name="Endtime" Nullable="true" />
+          <Property Type="String" Name="Dealtext" Nullable="true" />
+          <Property Type="String" Name="Percentage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="longitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location" Nullable="true" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="ISActive" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TicketUrl" Nullable="true" />
+          <Property Type="Boolean" Name="IsTmaster" Nullable="false" />
+          <Property Type="Int32" Name="MasterEventID" Nullable="true" />
+          <Property Type="Int64" Name="ViewCount" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="MainCatID" Nullable="true" />
+          <Property Type="Int32" Name="IsNew" Nullable="true" />
+          <Property Type="Int32" Name="DistanceMile" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2663,112 +2685,42 @@
           <FunctionImportMapping FunctionImportName="SP_UpdateProfile" FunctionName="MusicEventModel.Store.SP_UpdateProfile" />
           <FunctionImportMapping FunctionImportName="SplitString" FunctionName="MusicEventModel.Store.SplitString" />
           <FunctionImportMapping FunctionImportName="VerifyOTP" FunctionName="MusicEventModel.Store.VerifyOTP" />
-          <FunctionImportMapping FunctionImportName="GetEventListBySearch" FunctionName="MusicEventModel.Store.GetEventListBySearch" />
-          <FunctionImportMapping FunctionImportName="GetHeaderEvent" FunctionName="MusicEventModel.Store.GetHeaderEvent">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MusicEventModel.GetHeaderEvent_Result">
-                <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
-                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
-                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
-                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
-                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
-                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
-                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
-                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
-                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
-                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetTenLatestEventList" FunctionName="MusicEventModel.Store.GetTenLatestEventList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MusicEventModel.GetTenLatestEventList_Result">
-                <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
-                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
-                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
-                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
-                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
-                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
-                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
-                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
-                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
-                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetEventDetailsById" FunctionName="MusicEventModel.Store.GetEventDetailsById">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MusicEventModel.GetEventDetailsById_Result">
-                <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
-                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
-                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
-                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
-                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
-                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
-                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
-                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
-                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
-                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="EmailSubscribers">
             <EntityTypeMapping TypeName="MusicEventModel.EmailSubscriber">
               <MappingFragment StoreEntitySet="EmailSubscriber">
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewEvents">
+            <EntityTypeMapping TypeName="MusicEventModel.NewEvent">
+              <MappingFragment StoreEntitySet="NewEvent">
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2802,39 +2754,113 @@
                 <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
                 <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
                 <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="DistanceMile" ColumnName="DistanceMile" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="NewEvents">
-            <EntityTypeMapping TypeName="MusicEventModel.NewEvent">
-              <MappingFragment StoreEntitySet="NewEvent">
-                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
-                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
-                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
-                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
-                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
-                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
-                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
-                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
-                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <FunctionImportMapping FunctionImportName="GetEventDetailsById" FunctionName="MusicEventModel.Store.GetEventDetailsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetEventDetailsById_Result">
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="DistanceMile" ColumnName="DistanceMile" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEventListBySearch" FunctionName="MusicEventModel.Store.GetEventListBySearch" />
+          <FunctionImportMapping FunctionImportName="GetHeaderEvent" FunctionName="MusicEventModel.Store.GetHeaderEvent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetHeaderEvent_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="DistanceMile" ColumnName="DistanceMile" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTenLatestEventList" FunctionName="MusicEventModel.Store.GetTenLatestEventList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicEventModel.GetTenLatestEventList_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Starttime" ColumnName="Starttime" />
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="Dealtext" ColumnName="Dealtext" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
+                <ScalarProperty Name="TicketUrl" ColumnName="TicketUrl" />
+                <ScalarProperty Name="IsTmaster" ColumnName="IsTmaster" />
+                <ScalarProperty Name="MasterEventID" ColumnName="MasterEventID" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="MainCatID" ColumnName="MainCatID" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="DistanceMile" ColumnName="DistanceMile" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

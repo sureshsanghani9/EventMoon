@@ -4596,13 +4596,13 @@ Dark Skin
 
 .product-info .catInfo {
     color: red;
-    font-size: 16px;
+    font-size: 12px;
     text-transform: none;
 }
 
 .product-info .evtTime {
     color: red;
-    font-size: 16px;
+    font-size: 12px;
     text-transform: none;
 }
 
@@ -4636,4 +4636,7 @@ Dark Skin
 
 .product-info .price-tag {
     padding: 0px 5px;
+}
+.evtBlock img {
+    height: 278px;
 }

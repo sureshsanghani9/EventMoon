@@ -25,16 +25,16 @@ namespace MusicEventLib.Services
             }
         }
 
-        public EventDataModal GetEventDetailsById(int EventID)
+        public EventDataModal GetEventDetailsById(int EventID, string Latitude, string Longitude)
         {
             using (var db = new MusicEventEntities())
             {
-                var evt = db.GetEventDetailsById(EventID).ToList().FirstOrDefault();
+                var evt = db.GetEventDetailsById(EventID, Latitude, Longitude).ToList().FirstOrDefault();
                 return Mapper.Map<GetEventDetailsById_Result, EventDataModal>(evt);
             }
         }
 
-        public EventPageDataModal GetEventListBySearch(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort)
+        public EventPageDataModal GetEventListBySearch(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort, string Latitude, string Longitude)
         {
             using (var db = new MusicEventEntities())
             {
@@ -52,6 +52,8 @@ namespace MusicEventLib.Services
                 command.Parameters.Add(new SqlParameter("@PageNumber", PageNumber));
                 command.Parameters.Add(new SqlParameter("@PageSize", PageSize));
                 command.Parameters.Add(new SqlParameter("@Sort", Sort));
+                command.Parameters.Add(new SqlParameter("@Latitude", Latitude));
+                command.Parameters.Add(new SqlParameter("@Longitude", Longitude));
 
                 var reader = command.ExecuteReader();
                 List<EventDataModal> _events = ((IObjectContextAdapter)db).ObjectContext.Translate<EventDataModal>(reader).ToList();
@@ -66,21 +68,21 @@ namespace MusicEventLib.Services
             }
         }
 
-        public EventDataModal GetHeaderEvent()
+        public EventDataModal GetHeaderEvent(string Latitude, string Longitude)
         {
             using (var db = new MusicEventEntities())
             {
-                var evt = db.GetHeaderEvent().ToList().FirstOrDefault();
+                var evt = db.GetHeaderEvent(Latitude, Longitude).ToList().FirstOrDefault();
                 return Mapper.Map<GetHeaderEvent_Result, EventDataModal>(evt);
             }
         }
 
-        public List<EventDataModal> GetTenLatestEvents(int MainCategoryId, string Keyword, DateTime? startdate)
+        public List<EventDataModal> GetTenLatestEvents(int MainCategoryId, string Keyword, DateTime? startdate, string Latitude, string Longitude)
         {
 
             using (var db = new MusicEventEntities())
             {
-                var events = db.GetTenLatestEventList(MainCategoryId, Keyword, startdate).ToList();
+                var events = db.GetTenLatestEventList(MainCategoryId, Keyword, startdate, Latitude, Longitude).ToList();
                 return Mapper.Map<List<GetTenLatestEventList_Result>, List<EventDataModal>>(events);
             }
         }

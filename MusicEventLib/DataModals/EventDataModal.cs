@@ -36,5 +36,6 @@ namespace MusicEventLib.DataModals
         public int MainCatID { get; set; }
         public Nullable<int> IsNew { get; set; }
         //public string Discription { get; set; }
+        public int DistanceMile { get; set; }
     }
 }

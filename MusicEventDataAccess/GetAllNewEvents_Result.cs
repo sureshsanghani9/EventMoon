@@ -40,5 +40,6 @@ namespace MusicEventDataAccess
         public string MainCategoryName { get; set; }
         public Nullable<int> MainCatID { get; set; }
         public Nullable<int> IsNew { get; set; }
+        public int DistanceMile { get; set; }
     }
 }

@@ -1534,7 +1534,29 @@ namespace MusicEventDataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("VerifyOTP", oTPParameter, passwordParameter);
         }
     
-        public virtual int GetEventListBySearch(Nullable<int> mainCategoryId, string keyword, Nullable<int> pageNumber, Nullable<int> pageSize, string sort)
+        public virtual ObjectResult<GetAllNewEvents_Result> GetAllNewEvents()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllNewEvents_Result>("GetAllNewEvents");
+        }
+    
+        public virtual ObjectResult<GetEventDetailsById_Result> GetEventDetailsById(Nullable<int> eventID, string latitude, string longitude)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            var latitudeParameter = latitude != null ?
+                new ObjectParameter("Latitude", latitude) :
+                new ObjectParameter("Latitude", typeof(string));
+    
+            var longitudeParameter = longitude != null ?
+                new ObjectParameter("Longitude", longitude) :
+                new ObjectParameter("Longitude", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEventDetailsById_Result>("GetEventDetailsById", eventIDParameter, latitudeParameter, longitudeParameter);
+        }
+    
+        public virtual int GetEventListBySearch(Nullable<int> mainCategoryId, string keyword, Nullable<int> pageNumber, Nullable<int> pageSize, string sort, string latitude, string longitude)
         {
             var mainCategoryIdParameter = mainCategoryId.HasValue ?
                 new ObjectParameter("MainCategoryId", mainCategoryId) :
@@ -1556,15 +1578,31 @@ namespace MusicEventDataAccess
                 new ObjectParameter("Sort", sort) :
                 new ObjectParameter("Sort", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEventListBySearch", mainCategoryIdParameter, keywordParameter, pageNumberParameter, pageSizeParameter, sortParameter);
+            var latitudeParameter = latitude != null ?
+                new ObjectParameter("Latitude", latitude) :
+                new ObjectParameter("Latitude", typeof(string));
+    
+            var longitudeParameter = longitude != null ?
+                new ObjectParameter("Longitude", longitude) :
+                new ObjectParameter("Longitude", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEventListBySearch", mainCategoryIdParameter, keywordParameter, pageNumberParameter, pageSizeParameter, sortParameter, latitudeParameter, longitudeParameter);
         }
     
-        public virtual ObjectResult<GetHeaderEvent_Result> GetHeaderEvent()
+        public virtual ObjectResult<GetHeaderEvent_Result> GetHeaderEvent(string latitude, string longitude)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHeaderEvent_Result>("GetHeaderEvent");
+            var latitudeParameter = latitude != null ?
+                new ObjectParameter("Latitude", latitude) :
+                new ObjectParameter("Latitude", typeof(string));
+    
+            var longitudeParameter = longitude != null ?
+                new ObjectParameter("Longitude", longitude) :
+                new ObjectParameter("Longitude", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHeaderEvent_Result>("GetHeaderEvent", latitudeParameter, longitudeParameter);
         }
     
-        public virtual ObjectResult<GetTenLatestEventList_Result> GetTenLatestEventList(Nullable<int> mainCategoryId, string keyword, Nullable<System.DateTime> startdate)
+        public virtual ObjectResult<GetTenLatestEventList_Result> GetTenLatestEventList(Nullable<int> mainCategoryId, string keyword, Nullable<System.DateTime> startdate, string latitude, string longitude)
         {
             var mainCategoryIdParameter = mainCategoryId.HasValue ?
                 new ObjectParameter("MainCategoryId", mainCategoryId) :
@@ -1578,21 +1616,15 @@ namespace MusicEventDataAccess
                 new ObjectParameter("startdate", startdate) :
                 new ObjectParameter("startdate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTenLatestEventList_Result>("GetTenLatestEventList", mainCategoryIdParameter, keywordParameter, startdateParameter);
-        }
+            var latitudeParameter = latitude != null ?
+                new ObjectParameter("Latitude", latitude) :
+                new ObjectParameter("Latitude", typeof(string));
     
-        public virtual ObjectResult<GetEventDetailsById_Result> GetEventDetailsById(Nullable<int> eventID)
-        {
-            var eventIDParameter = eventID.HasValue ?
-                new ObjectParameter("EventID", eventID) :
-                new ObjectParameter("EventID", typeof(int));
+            var longitudeParameter = longitude != null ?
+                new ObjectParameter("Longitude", longitude) :
+                new ObjectParameter("Longitude", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEventDetailsById_Result>("GetEventDetailsById", eventIDParameter);
-        }
-    
-        public virtual ObjectResult<GetAllNewEvents_Result> GetAllNewEvents()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllNewEvents_Result>("GetAllNewEvents");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTenLatestEventList_Result>("GetTenLatestEventList", mainCategoryIdParameter, keywordParameter, startdateParameter, latitudeParameter, longitudeParameter);
         }
     }
 }
