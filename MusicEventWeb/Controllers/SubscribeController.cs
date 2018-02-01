@@ -75,7 +75,7 @@ namespace MusicEventApp.Controllers
 
         public ActionResult NewEventEmail()
         {
-            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Latitude = Session["ULatitude"] != null ? Session["ULatitude"].ToString() : "0";
             string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
 
             ViewBag.MySiteURL = ConfigurationManager.AppSettings["MySiteURL"] != null ? ConfigurationManager.AppSettings["MySiteURL"].ToString() : "";

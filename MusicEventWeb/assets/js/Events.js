@@ -23,16 +23,8 @@ $(document).ready(function () {
         var MainCategoryId = $("#MainCatID").val();
         var Keyword = $("#keyword").val();
         var startdate = $("#starttime").val();
-        $('.pageLoader').addClass("active");
-        $.ajax({
-            url: '/Home/LatestEventList',
-            type: 'POST',
-            cache: false,
-            data: { MainCategoryId: MainCategoryId, Keyword: Keyword, startdate: startdate }
-        }).done(function (result) {
-            $('#divLatestEventsList').html(result);
-            $('.pageLoader').removeClass("active");
-        });
+
+        GetLatestEventList(MainCategoryId, Keyword, startdate);
     });
 
     $("#btnSearchEvent").on("click", function () {
@@ -171,7 +163,8 @@ function getUserGeoLocation() {
             $("#hdnUserLatitude").val(pos.lat);
             $("#hdnUserLongitude").val(pos.lng);
 
-            resolveDistanceForEvent();
+            //resolveDistanceForEvent();
+            SetUserLocation();
             
         }, function () {
             $.getJSON('https://ipinfo.io/geo', function (response) {
@@ -184,7 +177,8 @@ function getUserGeoLocation() {
                 $("#hdnUserLatitude").val(pos.lat);
                 $("#hdnUserLongitude").val(pos.lng);
 
-                resolveDistanceForEvent();
+                //resolveDistanceForEvent();
+                SetUserLocation();
             });
         });
     }
@@ -219,4 +213,33 @@ function calcCrow(lat1, lon1, lat2, lon2) {
 // Converts numeric degrees to radians
 function toRad(Value) {
     return Value * Math.PI / 180;
+}
+
+function GetLatestEventList(MainCategoryId, Keyword, startdate)
+{
+    $('.pageLoader').addClass("active");
+    $.ajax({
+        url: '/Home/LatestEventList',
+        type: 'POST',
+        cache: false,
+        data: { MainCategoryId: MainCategoryId, Keyword: Keyword, startdate: startdate }
+    }).done(function (result) {
+        $('#divLatestEventsList').html(result);
+        $('.pageLoader').removeClass("active");
+    });
+}
+
+function SetUserLocation() {
+
+    var Latitude = $("#hdnUserLatitude").val();
+    var Longitude = $("#hdnUserLongitude").val();
+
+    $.ajax({
+        url: '/Home/SetUserLocation',
+        type: 'POST',
+        cache: false,
+        data: { Latitude: Latitude, Longitude: Longitude }
+    }).done(function (result) {
+        GetLatestEventList(0, "", null);
+    });
 }

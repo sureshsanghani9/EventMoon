@@ -20,7 +20,7 @@ namespace MusicEventApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Latitude = Session["ULatitude"] != null ? Session["ULatitude"].ToString() : "0";
             string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
 
             List<MetaDataViewModel> MetaData = new List<MetaDataViewModel> {
@@ -41,12 +41,21 @@ namespace MusicEventApp.Controllers
         [HttpPost]
         public ActionResult LatestEventList(int MainCategoryId, string Keyword, DateTime? startdate)
         {
-            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Latitude = Session["ULatitude"] != null ? Session["ULatitude"].ToString() : "0";
             string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
 
             List<EventDataModal> EventsData = _EventService.GetTenLatestEvents(MainCategoryId, Keyword, startdate, Latitude, Longitude);
             List<EventViewModal> Events = Mapper.Map<List<EventDataModal>, List<EventViewModal>>(EventsData);
             return PartialView("_LatestEventsListPartial", Events);
+        }
+
+        [HttpPost]
+        public string SetUserLocation(string Latitude, string Longitude)
+        {
+            Session["ULatitude"] = Latitude;
+            Session["ULongitude"] = Longitude;
+
+            return "success";
         }
 
         public ActionResult Event(int id)

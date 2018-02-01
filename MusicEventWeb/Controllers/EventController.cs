@@ -35,7 +35,7 @@ namespace MusicEventApp.Controllers
         [HttpPost]
         public ActionResult EventList(int MainCategoryId, string Keyword, int PageNumber, int PageSize, string Sort)
         {
-            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Latitude = Session["ULatitude"] != null ? Session["ULatitude"].ToString() : "0";
             string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
 
             EventPageDataModal EventPage = _EventService.GetEventListBySearch(MainCategoryId, Keyword, PageNumber, PageSize, Sort, Latitude, Longitude);
@@ -47,7 +47,7 @@ namespace MusicEventApp.Controllers
 
         public ActionResult Details(int id)
         {
-            string Latitude = Session["Latitude"] != null ? Session["Latitude"].ToString() : "0";
+            string Latitude = Session["ULatitude"] != null ? Session["ULatitude"].ToString() : "0";
             string Longitude = Session["ULongitude"] != null ? Session["ULongitude"].ToString() : "0";
 
             EventDataModal evtdata = _EventService.GetEventDetailsById(id, Latitude, Longitude);
