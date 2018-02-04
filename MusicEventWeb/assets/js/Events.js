@@ -2,21 +2,19 @@
 
 $(document).ready(function () {
 
-    if ($(document).find("title").text() == "Home")
-    {
+    getUserGeoLocation();
+    if ($(document).find("title").text() == "Home") {
         OpenMobileAppDownloadPopup();
-        getUserGeoLocation();
     }
 
-    if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Details")
-    {
+    if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Details") {
         // Set the date we're counting down to
         countDownDate = new Date($("#Startdate").val()).getTime();
         StartTimer(countDownDate);
     }
 
     if ($(document).find("title").text() == "Home" || $(document).find("title").text() == "Events") {
-        
+
     }
 
     $("#btnFindEvent").on("click", function () {
@@ -132,20 +130,17 @@ function RefreshEventPage() {
                 RefreshEventPage();
             }
         }));
-        getUserGeoLocation();
+        //getUserGeoLocation();
         $('.pageLoader').removeClass("active");
     });
 }
 
-function OpenMobileAppDownloadPopup()
-{
+function OpenMobileAppDownloadPopup() {
     var uagent = navigator.userAgent.toLowerCase();
-    if (uagent.search("iphone") > -1)
-    {
+    if (uagent.search("iphone") > -1) {
         $("#appDownloadIOS2").modal('show');
     }
-    else if (uagent.search("android") > -1)
-    {
+    else if (uagent.search("android") > -1) {
         $("#appDownloadAndriod2").modal('show');
     }
 }
@@ -165,7 +160,7 @@ function getUserGeoLocation() {
 
             //resolveDistanceForEvent();
             SetUserLocation();
-            
+
         }, function () {
             $.getJSON('https://ipinfo.io/geo', function (response) {
                 var loc = response.loc.split(',');
@@ -215,8 +210,7 @@ function toRad(Value) {
     return Value * Math.PI / 180;
 }
 
-function GetLatestEventList(MainCategoryId, Keyword, startdate)
-{
+function GetLatestEventList(MainCategoryId, Keyword, startdate) {
     $('.pageLoader').addClass("active");
     $.ajax({
         url: '/Home/LatestEventList',
@@ -240,6 +234,9 @@ function SetUserLocation() {
         cache: false,
         data: { Latitude: Latitude, Longitude: Longitude }
     }).done(function (result) {
-        GetLatestEventList(0, "", null);
+        if ($(document).find("title").text() == "Home")
+        {
+            GetLatestEventList(0, "", null);
+        }
     });
 }
