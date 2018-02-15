@@ -3,6 +3,8 @@
     string AndriodAppURL = ConfigurationManager.AppSettings["AndriodAppURL"] != null ? ConfigurationManager.AppSettings["AndriodAppURL"].ToString() : "";
     string iOSAppURl = ConfigurationManager.AppSettings["iOSAppURl"] != null ? ConfigurationManager.AppSettings["iOSAppURl"].ToString() : "";
 }
+<input type="hidden" id="hdnAndriodAppURL" value="@AndriodAppURL" />
+<input type="hidden" id="hdniOSAppURl" value="@iOSAppURl"/>
 
 <!-- BEGIN # MODAL LOGIN -->
 <div class="modal fade" id="appDownloadAndriod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

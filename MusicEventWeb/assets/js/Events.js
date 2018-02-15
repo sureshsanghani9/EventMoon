@@ -57,8 +57,6 @@ $(document).ready(function () {
         $pagination.twbsPagination(defaultOpts);
         RefreshEventPage();
     }
-
-
 });
 
 function StartTimer(countDownDate) {
@@ -119,29 +117,40 @@ function RefreshEventPage() {
         if ($("#hdnCurrentPage").val() == "1") {
             currentPage = 1;
         }
-        $pagination.twbsPagination('destroy');
-        $pagination.twbsPagination($.extend({}, defaultOpts, {
-            initiateStartPageClick: false,
-            startPage: currentPage,
-            totalPages: totalPages,
-            visiblePages: 5,
-            onPageClick: function (event, page) {
-                $("#hdnCurrentPage").val(page);
-                RefreshEventPage();
-            }
-        }));
+        if (totalPages == 0) {
+            $('#divEventPage').html("<span class='norecords'>There is no records found for this search!</span>");
+        }
+        else
+        {
+            $pagination.twbsPagination('destroy');
+            $pagination.twbsPagination($.extend({}, defaultOpts, {
+                initiateStartPageClick: false,
+                startPage: currentPage,
+                totalPages: totalPages,
+                visiblePages: 5,
+                onPageClick: function (event, page) {
+                    $("#hdnCurrentPage").val(page);
+                    RefreshEventPage();
+                }
+            }));
         //getUserGeoLocation();
+        }
+        
         $('.pageLoader').removeClass("active");
     });
 }
 
 function OpenMobileAppDownloadPopup() {
     var uagent = navigator.userAgent.toLowerCase();
+    var androidurl = $("#hdnAndriodAppURL").val();
+    var iosurl = $("#hdniOSAppURl").val();
     if (uagent.search("iphone") > -1) {
-        $("#appDownloadIOS2").modal('show');
+        //$("#appDownloadIOS2").modal('show');
+        ShowDownloadNotification(iosurl);
     }
     else if (uagent.search("android") > -1) {
-        $("#appDownloadAndriod2").modal('show');
+        //$("#appDownloadAndriod2").modal('show');
+        ShowDownloadNotification(androidurl);
     }
 }
 
@@ -240,3 +249,13 @@ function SetUserLocation() {
         }
     });
 }
+
+function ShowDownloadNotification(url) {
+    var html = '<div class="alert alert-black alert-dismissable page-alert">';
+    html += '<button type="button" class="close" onclick=\'$(this).closest(".page-alert").slideUp();\'><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
+    html += '<div class="nDivLogo"><a class="nLogo navbar-brand" href="~/"><img src="/assets/img/logo/logo4.png" alt=""/></a ></div>';
+    html += '<div class="nDivTitleStar"><div class="nDivTitle"><label class="nTitle">Musicpad Inc.</label></div><div class="nDivStar"><span class="fa fa-star checked" ></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="spanCount">(5)</span></div></div>';
+    html += '<div class="nDivAppLabel"><label class="nAppLabel">Get App !</label>';
+    html += '<a href="' + url +'" class="nBtnDownload blink">Download</a></div>';
+    $(html).hide().prependTo('#noty-holder').slideDown();
+};
